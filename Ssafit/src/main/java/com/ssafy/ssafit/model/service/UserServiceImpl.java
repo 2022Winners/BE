@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ssafy.ssafit.exception.UserNotFoundException;
 import com.ssafy.ssafit.exception.IdIncorrectException;
 import com.ssafy.ssafit.exception.PwIncorrectException;
 import com.ssafy.ssafit.model.dao.ImageDao;
@@ -78,6 +77,13 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Transactional
+	@Override
+	public void update(User user) throws Exception{ // 회원 정보 수정
+		user.setLoginPw((new SHA256().getHash(user.getLoginPw())));
+		userDao.updateUser(user);	
+	}
+
 }
 
 //
@@ -98,10 +104,3 @@ public class UserServiceImpl implements UserService {
 //		return user;
 //	}
 //	
-//	@Transactional
-//	@Override
-//	public void update(HttpSession session, User user) throws Exception{ // 회원 정보 수정
-//		user.setLoginPw((new SHA256().getHash(user.getLoginPw())));
-//		session.setAttribute("nickname", user.getNickname());
-//		userDao.updateUser(user);	
-//	}

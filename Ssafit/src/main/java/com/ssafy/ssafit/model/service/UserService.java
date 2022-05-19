@@ -9,8 +9,8 @@ public interface UserService {
 	
 	void login(String id, String pw) throws Exception; // 로그인
 	
+	void update(User user) throws Exception;
 //	void logout(HttpSession session);
 //	void getout(int id);
 //	User myPage(int id);
-//	void update(HttpSession session, User user) throws Exception;
 }
