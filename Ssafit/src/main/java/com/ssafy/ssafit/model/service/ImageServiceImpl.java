@@ -1,20 +1,19 @@
 package com.ssafy.ssafit.model.service;
 
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.ssafy.ssafit.exception.PwIncorrectException;
-import com.ssafy.ssafit.exception.UserFoundException;
-import com.ssafy.ssafit.exception.UserNotFoundException;
-import com.ssafy.ssafit.model.dao.ImageDao;
-import com.ssafy.ssafit.model.dto.User;
-import com.ssafy.ssafit.util.SHA256;
 
 @Service
 public class ImageServiceImpl implements ImageService {
+
+//	@Autowired
+//	private ImageDao imageDao;
+//
+//	@Override
+//	public Image join(Image image) { // 회원가입
+//		imageDao.insertImage(image);
+//		return imageDao.selectImage(image.getUserId());
+//	}
+}
 //
 //	@Autowired
 //	private FileDao fileDao;
@@ -67,4 +66,3 @@ public class ImageServiceImpl implements ImageService {
 //		session.setAttribute("nickname", user.getNickname());
 //		userDao.updateUser(user);	
 //	}
-}

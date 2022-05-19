@@ -2,7 +2,7 @@ package com.ssafy.ssafit.model.dto;
 
 public class User {
 	private int id;
-	private int fileId;
+	private int imageId;
 	private String loginId;
 	private String loginPw;
 	private String nickname;
@@ -16,10 +16,10 @@ public class User {
 
 	}
 
-	public User(int id, int fileId, String loginId, String loginPw, String nickname, String email, int gender, int age,
+	public User(int id, int imageId, String loginId, String loginPw, String nickname, String email, int gender, int age,
 			boolean role, String createdAt) {
 		this.id = id;
-		this.fileId = fileId;
+		this.imageId = imageId;
 		this.loginId = loginId;
 		this.loginPw = loginPw;
 		this.nickname = nickname;
@@ -38,12 +38,12 @@ public class User {
 		this.id = id;
 	}
 
-	public int getFileId() {
-		return fileId;
+	public int getImageId() {
+		return imageId;
 	}
 
-	public void setFileId(int fileId) {
-		this.fileId = fileId;
+	public void setImageId(int imageId) {
+		this.imageId = imageId;
 	}
 
 	public String getLoginId() {
@@ -112,7 +112,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", fileId=" + fileId + ", loginId=" + loginId + ", loginPw=" + loginPw + ", nickname="
+		return "User [id=" + id + ", imageId=" + imageId + ", loginId=" + loginId + ", loginPw=" + loginPw + ", nickname="
 				+ nickname + ", email=" + email + ", gender=" + gender + ", age=" + age + ", role=" + role
 				+ ", createdAt=" + createdAt + "]";
 	}
