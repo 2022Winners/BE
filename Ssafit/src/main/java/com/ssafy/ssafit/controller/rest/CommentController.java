@@ -23,39 +23,39 @@ import com.ssafy.ssafit.model.service.PostService;
 @RestController
 @RequestMapping("/api")
 public class CommentController {
-	@Autowired
-	private PostService boardService;
-	// C
-	@PostMapping("/board")
-	public ResponseEntity<?> create(@RequestPart(name = "boardData") Post board, @RequestPart(required = false, name = "file") MultipartFile file) {
-		boardService.create(board, file);
-		return new ResponseEntity<>(HttpStatus.CREATED);
-	}
-	// R - One
-	@GetMapping("/board/{id}")
-	public ResponseEntity<Post> getOne(@PathVariable int id) {
-		return new ResponseEntity<Post>(boardService.getOne(id), HttpStatus.OK);
-	}
-	// R - List
-	@GetMapping("/boards")
-	public ResponseEntity<List<Post>> getList(@RequestParam(defaultValue = "") String mode, @RequestParam(defaultValue = "") String keyword) {
-		HashMap<String, String> params = new HashMap<String, String>();
-		params.put("mode", mode);
-		params.put("keyword", keyword);
-		return new ResponseEntity<List<Post>>(boardService.getList(params), HttpStatus.OK);
-	}
-	// U
-	@PutMapping("/board/{id}")
-	public ResponseEntity<?> update(@PathVariable int id, Post board, @RequestParam(required=false) MultipartFile file) {	
-		boardService.update(board, file);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
-	// D
-	@DeleteMapping("/board/{id}")
-	public ResponseEntity<?> delete(@PathVariable int id) {
-		boardService.delete(id);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
+//	@Autowired
+//	private PostService boardService;
+//	// C
+//	@PostMapping("/board")
+//	public ResponseEntity<?> create(@RequestPart(name = "boardData") Post board, @RequestPart(required = false, name = "file") MultipartFile file) {
+//		boardService.create(board, file);
+//		return new ResponseEntity<>(HttpStatus.CREATED);
+//	}
+//	// R - One
+//	@GetMapping("/board/{id}")
+//	public ResponseEntity<Post> getOne(@PathVariable int id) {
+//		return new ResponseEntity<Post>(boardService.getOne(id), HttpStatus.OK);
+//	}
+//	// R - List
+//	@GetMapping("/boards")
+//	public ResponseEntity<List<Post>> getList(@RequestParam(defaultValue = "") String mode, @RequestParam(defaultValue = "") String keyword) {
+//		HashMap<String, String> params = new HashMap<String, String>();
+//		params.put("mode", mode);
+//		params.put("keyword", keyword);
+//		return new ResponseEntity<List<Post>>(boardService.getList(params), HttpStatus.OK);
+//	}
+//	// U
+//	@PutMapping("/board/{id}")
+//	public ResponseEntity<?> update(@PathVariable int id, Post board, @RequestParam(required=false) MultipartFile file) {	
+//		boardService.update(board, file);
+//		return new ResponseEntity<>(HttpStatus.OK);
+//	}
+//	// D
+//	@DeleteMapping("/board/{id}")
+//	public ResponseEntity<?> delete(@PathVariable int id) {
+//		boardService.delete(id);
+//		return new ResponseEntity<>(HttpStatus.OK);
+//	}
 }
 
 

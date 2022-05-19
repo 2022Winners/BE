@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.ssafy.ssafit.model.dao.UserDao">
-  	<resultMap type="user" id="userMap">
+  	<!-- <resultMap type="user" id="userMap">
   		<id column="id" property="id"/>
   		<result column="login_id" property="loginId"/>
   		<result column="login_pw" property="loginPw"/>
@@ -17,8 +17,8 @@
   		SET 
   		login_pw = #{loginPw},
   		nickname = #{nickname}
-<!--    		file_name = #{fileName},
-  		file_uri = #{fileUri} -->
+   		file_name = #{fileName},
+  		file_uri = #{fileUri}
   		WHERE id = #{id}
   	</update>
   	<delete id="deleteUser" parameterType="int">
@@ -29,5 +29,5 @@
 	</select>
 	<select id="selectByLoginId" resultMap="userMap" parameterType="string">
 		SELECT * FROM user WHERE login_id = #{loginId}
-	</select>
-</mapper>
+	</select> -->
+ </mapper>
