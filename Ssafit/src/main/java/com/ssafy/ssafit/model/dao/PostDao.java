@@ -6,18 +6,21 @@ import java.util.List;
 import com.ssafy.ssafit.model.dto.Post;
 
 public interface PostDao {
-	// 게시글 수정 update
-	void updateBoard(Post board);
+	// 영상 게시글 수정 update
+	void updatePost(Post post);
 
-	// 게시글 삭제 delete
-	void deleteBoard(int id);
+	// 영상 게시글 삭제 delete
+	void deletePost(int id);
 
-	// 게시글 추가 insert
-	void insertBoard(Post board);
+	// 영상 게시글 추가 insert
+	void insertPost(Post post);
 
-	// 게시글 조회 selectOne
+	// 영상 게시글 조회 selectOne
 	Post selectOne(int id);
 
-	// 게시글 목록 selectList
+	// 영상 게시글 목록 selectList
 	List<Post> selectList(HashMap<String, String> params);
+	
+	// 파트별 영상 조회
+	List<Post> selectPart(String part);
 }

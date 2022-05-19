@@ -19,6 +19,62 @@ import com.ssafy.ssafit.model.dto.Post;
 
 @Service
 public class PostServiceImpl implements PostService {
+	
+	@Autowired
+	private PostDao postDao;
+
+	@Override
+	public void create(Post post) {
+		postDao.insertPost(post);
+	}
+
+	@Override
+	public void update(Post post) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateViewCnt(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void updateLikeCnt(int id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Post getOne(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Post readOne(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> getList(HashMap<String, String> params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> getPartList(String part) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 //	@Autowired
 //	private PostDao postDao;
 //
