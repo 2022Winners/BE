@@ -1,35 +1,69 @@
 package com.ssafy.ssafit.model.service;
 
-import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+import javax.servlet.ServletContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.ssafy.ssafit.exception.PwIncorrectException;
-import com.ssafy.ssafit.exception.UserFoundException;
-import com.ssafy.ssafit.exception.UserNotFoundException;
+import com.ssafy.ssafit.model.dao.ImageDao;
 import com.ssafy.ssafit.model.dao.UserDao;
+import com.ssafy.ssafit.model.dto.Image;
 import com.ssafy.ssafit.model.dto.User;
 import com.ssafy.ssafit.util.SHA256;
 
 @Service
 public class UserServiceImpl implements UserService {
-//
-//	@Autowired
-//	private UserDao userDao;
-//
-//	@Transactional
-//	@Override
-//	public void join(User user) throws Exception { // 회원가입
-//		User preUser = userDao.selectByLoginId(user.getLoginId());
-//		if (preUser != null) // 이미 같은 아이디가 존재한다면
-//			throw new UserFoundException();
-//		else { // 아니면 가입 성공 ~
-//			user.setLoginPw((new SHA256().getHash(user.getLoginPw())));
-//			userDao.insertUser(user);
-//		}
-//	}
+
+	@Autowired
+	private UserDao userDao;
+
+	@Autowired
+	private ImageDao imageDao;
+
+	@Autowired
+	private ServletContext servletContext;
+
+	@Transactional
+	@Override
+	public void join(User user, MultipartFile file) throws Exception { // 회원가입
+		user.setLoginPw((new SHA256().getHash(user.getLoginPw()))); // 비밀번호 변환
+		user.setId(userDao.insertUser(user)); // 이미지 없이 유저 삽입
+		if (file.getSize() != 0) { // 이미지 있다면
+			user.setImageId(imageDao.insertImage(saveImage(user.getId(), file))); // 이미지 저장하고
+			userDao.updateUser(user);// 유저에 이미지아이디 저장해서 업데이트
+		}
+	}
+
+	private Image saveImage(int userId, MultipartFile file) {
+		Image image = new Image();
+
+		String uploadPath = servletContext.getRealPath("/file");
+		String fileName = file.getOriginalFilename();
+		String saveName = UUID.randomUUID() + "";
+		File target = new File(uploadPath, saveName);
+		if (!new File(uploadPath).exists())
+			new File(uploadPath).mkdirs();
+		try {
+			FileCopyUtils.copy(file.getBytes(), target);
+			image.setName(fileName);
+			image.setUri(target.getCanonicalPath());
+			image.setUserId(userId);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return image;
+	}
+
+}
+
 //
 //	@Override
 //	public void login(HttpSession session, String loginId, String loginPw) throws Exception { // 로그인
@@ -67,4 +101,3 @@ public class UserServiceImpl implements UserService {
 //		session.setAttribute("nickname", user.getNickname());
 //		userDao.updateUser(user);	
 //	}
-}
