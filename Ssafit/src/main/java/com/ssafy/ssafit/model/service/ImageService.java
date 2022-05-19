@@ -4,7 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import com.ssafy.ssafit.model.dto.User;
 
-public interface FileService {
+public interface ImageService {
 //	void join(User user) throws Exception;
 //	void login(HttpSession session, String id, String pw) throws Exception;
 //	void logout(HttpSession session);

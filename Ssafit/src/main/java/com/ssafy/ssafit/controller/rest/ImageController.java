@@ -22,7 +22,7 @@ import com.ssafy.ssafit.model.service.PostService;
 
 @RestController
 @RequestMapping("/api")
-public class FileController {
+public class ImageController {
 //	@Autowired
 //	private PostService boardService;
 //	// C
