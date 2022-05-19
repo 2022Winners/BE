@@ -79,11 +79,15 @@ public class UserServiceImpl implements UserService {
 
 	@Transactional
 	@Override
-	public void update(User user) throws Exception{ // 회원 정보 수정
+	public void update(User user) throws Exception { // 회원 정보 수정
 		user.setLoginPw((new SHA256().getHash(user.getLoginPw())));
-		userDao.updateUser(user);	
+		userDao.updateUser(user);
 	}
 
+	@Override
+	public void getout(int id) { // 회원 탈퇴
+		userDao.deleteUser(id);
+	}
 }
 
 //
@@ -93,10 +97,6 @@ public class UserServiceImpl implements UserService {
 //		session.invalidate();
 //	}
 //
-//	@Override
-//	public void getout(int id) { // 회원 탈퇴
-//		userDao.deleteUser(id);
-//	}
 //
 //	@Override
 //	public User myPage(int id) { // 마이페이지 회원 정보

@@ -6,11 +6,13 @@ import com.ssafy.ssafit.model.dto.User;
 
 public interface UserService {
 	void join(User user, MultipartFile file) throws Exception; // 회원가입
-	
+
 	void login(String id, String pw) throws Exception; // 로그인
+
+	void update(User user) throws Exception; // 회원 정보 수정
+
+	void getout(int id); // 회원 탈퇴
 	
-	void update(User user) throws Exception;
 //	void logout(HttpSession session);
-//	void getout(int id);
 //	User myPage(int id);
 }
