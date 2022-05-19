@@ -9,12 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ssafy.ssafit.exception.PwIncorrectException;
 import com.ssafy.ssafit.exception.UserFoundException;
 import com.ssafy.ssafit.exception.UserNotFoundException;
-import com.ssafy.ssafit.model.dao.FileDao;
+import com.ssafy.ssafit.model.dao.ImageDao;
 import com.ssafy.ssafit.model.dto.User;
 import com.ssafy.ssafit.util.SHA256;
 
 @Service
-public class FileServiceImpl implements FileService {
+public class ImageServiceImpl implements ImageService {
 //
 //	@Autowired
 //	private FileDao fileDao;

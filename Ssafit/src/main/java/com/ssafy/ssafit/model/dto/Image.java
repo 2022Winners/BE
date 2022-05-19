@@ -1,16 +1,16 @@
 package com.ssafy.ssafit.model.dto;
 
-public class File {
+public class Image {
 	private int id;
 	private int userId;
 	private String name;
 	private String uri;
 	
-	public File() {
+	public Image() {
 
 	}
 
-	public File(int id, int userId, String name, String uri) {
+	public Image(int id, int userId, String name, String uri) {
 		this.id = id;
 		this.userId = userId;
 		this.name = name;

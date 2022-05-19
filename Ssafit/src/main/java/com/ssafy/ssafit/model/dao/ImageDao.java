@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.ssafy.ssafit.model.dto.Post;
 
-public interface FileDao {
+public interface ImageDao {
 	// 게시글 수정 update
 	void updateBoard(Post board);
 
