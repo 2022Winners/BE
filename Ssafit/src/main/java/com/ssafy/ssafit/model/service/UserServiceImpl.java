@@ -12,6 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ssafy.ssafit.exception.UserNotFoundException;
+import com.ssafy.ssafit.exception.IdIncorrectException;
+import com.ssafy.ssafit.exception.PwIncorrectException;
 import com.ssafy.ssafit.model.dao.ImageDao;
 import com.ssafy.ssafit.model.dao.UserDao;
 import com.ssafy.ssafit.model.dto.Image;
@@ -62,21 +65,22 @@ public class UserServiceImpl implements UserService {
 		return image;
 	}
 
+	@Override
+	public void login(String loginId, String loginPw) throws Exception { // 로그인
+		User user = userDao.selectByLoginId(loginId);
+		if (user == null) // loginId로 못 찾은 경우
+			throw new IdIncorrectException();
+		else if (!user.getLoginPw().equals(new SHA256().getHash(loginPw))) // 비밀번호가 다른 경우
+			throw new PwIncorrectException();
+		else {
+			System.out.println("ok");
+			// 로그인 성공! jwt 발급해주자~
+		}
+	}
+
 }
 
 //
-//	@Override
-//	public void login(HttpSession session, String loginId, String loginPw) throws Exception { // 로그인
-//		User user = userDao.selectByLoginId(loginId);
-//		if (user == null)
-//			throw new UserNotFoundException();
-//		else if (!user.getLoginPw().equals(new SHA256().getHash(loginPw)))
-//			throw new PwIncorrectException();
-//		else {
-//			session.setAttribute("nickname", user.getNickname());
-//			session.setAttribute("id", user.getId());
-//		}
-//	}
 //
 //	@Override
 //	public void logout(HttpSession session) { // 로그아웃
