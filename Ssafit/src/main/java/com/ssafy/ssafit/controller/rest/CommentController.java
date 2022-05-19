@@ -23,6 +23,9 @@ import com.ssafy.ssafit.model.service.PostService;
 @RestController
 @RequestMapping("/api")
 public class CommentController {
+	public static void main(String[] args) {
+		System.out.println("sdfa");
+	}
 //	@Autowired
 //	private PostService boardService;
 //	// C
