@@ -1,23 +1,23 @@
 package com.ssafy.ssafit.model.dao;
 
-import java.util.HashMap;
-import java.util.List;
-
-import com.ssafy.ssafit.model.dto.Post;
+import com.ssafy.ssafit.model.dto.Comment;
 
 public interface CommentDao {
-	// 게시글 수정 update
-	void updateBoard(Post board);
+	// 댓글 추가 insert
+	void insertComment(Comment comment);
 
-	// 게시글 삭제 delete
-	void deleteBoard(int id);
+	// 댓글 조회 selectOne
+	Comment selectOne(int id);
 
-	// 게시글 추가 insert
-	void insertBoard(Post board);
+	// 댓글 목록 selectList
+//	List<Comment> selectList();
 
-	// 게시글 조회 selectOne
-	Post selectOne(int id);
+	// 댓글 수정 update
+	void updateComment(Comment comment);
 
-	// 게시글 목록 selectList
-//	List<Post> selectList(HashMap<String, String> params);
+	// 댓글 삭제 delete
+	void deleteComment(int id);
+
+	// 게시물 삭제에 따른 댓글 삭제 delete
+	void deleteCommentByPostId(int postId);
 }

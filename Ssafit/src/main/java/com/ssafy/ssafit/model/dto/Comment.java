@@ -4,7 +4,6 @@ public class Comment {
 	private int id;
 	private int userId;
 	private int postId;
-	private int commentId;
 	private String content;
 	private String createdAt;
 
@@ -12,11 +11,10 @@ public class Comment {
 
 	}
 
-	public Comment(int id, int userId, int postId, int commentId, String content, String createdAt) {
+	public Comment(int id, int userId, int postId, String content, String createdAt) {
 		this.id = id;
 		this.userId = userId;
 		this.postId = postId;
-		this.commentId = commentId;
 		this.content = content;
 		this.createdAt = createdAt;
 	}
@@ -45,14 +43,6 @@ public class Comment {
 		this.postId = postId;
 	}
 
-	public int getCommentId() {
-		return commentId;
-	}
-
-	public void setCommentId(int commentId) {
-		this.commentId = commentId;
-	}
-	
 	public String getContent() {
 		return content;
 	}
@@ -71,7 +61,7 @@ public class Comment {
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", userId=" + userId + ", postId=" + postId + ", commentId=" + commentId + ", content=" + content
+		return "Comment [id=" + id + ", userId=" + userId + ", postId=" + postId + ", content=" + content
 				+ ", createdAt=" + createdAt + "]";
 	}
 

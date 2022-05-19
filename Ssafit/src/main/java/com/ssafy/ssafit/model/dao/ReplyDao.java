@@ -11,10 +11,10 @@ public interface ReplyDao {
 
 	// 게시글 삭제 delete
 	void deleteBoard(int id);
-
+	
 	// 게시글 추가 insert
 	void insertBoard(Post board);
-
+	
 	// 게시글 조회 selectOne
 	Post selectOne(int id);
 
