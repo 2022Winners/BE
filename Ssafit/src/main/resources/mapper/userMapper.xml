@@ -37,10 +37,9 @@
 	<delete id="deleteUser" parameterType="int"> 
 		DELETE FROM user WHERE id = #{id} 
 	</delete>
-</mapper>
 
-<!-- 
-<select id="selectById" resultMap="userMap" parameterType="int">
+	<select id="selectById" resultMap="userMap" parameterType="int">
 		SELECT * FROM user WHERE id = #{id}
 	</select>
-	 -->
+</mapper>
+

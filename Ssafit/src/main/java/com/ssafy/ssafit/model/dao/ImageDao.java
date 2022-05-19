@@ -7,5 +7,5 @@ public interface ImageDao {
 	int insertImage(Image image);
 
 	// 이미지 조회
-//	Image selectImage(int userId);
+	Image selectImage(int userId);
 }

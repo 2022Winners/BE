@@ -1,5 +1,7 @@
 package com.ssafy.ssafit.model.service;
 
+import java.util.Map;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.ssafit.model.dto.User;
@@ -13,6 +15,7 @@ public interface UserService {
 
 	void getout(int id); // 회원 탈퇴
 	
-//	void logout(HttpSession session);
-//	User myPage(int id);
+	Map<String, Object> myPage(int id); // 회원 상세 조회
+
+	//	void logout(HttpSession session);
 }
