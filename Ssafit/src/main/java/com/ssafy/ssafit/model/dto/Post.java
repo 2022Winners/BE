@@ -10,20 +10,9 @@ public class Post {
 	private int likeCnt;
 	private String createdAt;
 
+
 	public Post() {
 
-	}
-
-	public Post(int id, String title, String channel, String part, String videoId, int viewCnt, int likeCnt,
-			String createdAt) {
-		this.id = id;
-		this.title = title;
-		this.channel = channel;
-		this.part = part;
-		this.videoId = videoId;
-		this.viewCnt = viewCnt;
-		this.likeCnt = likeCnt;
-		this.createdAt = createdAt;
 	}
 
 	public int getId() {

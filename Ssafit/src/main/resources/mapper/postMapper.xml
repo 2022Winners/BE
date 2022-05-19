@@ -3,60 +3,61 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.ssafy.ssafit.model.dao.PostDao">
-  <!-- 	<resultMap type="post" id="postMap">
+    <resultMap type="post" id="postMap">
   		<id column="id" property="id"/>
-  		<result column="user_id" property="userId"/>
-  		<result column="writer" property="writer"/>
   		<result column="title" property="title"/>
-  		<result column="content" property="content"/>
+  		<result column="channel" property="channel"/>
+  		<result column="part" property="part"/>
+  		<result column="video_id" property="videoId"/>
   		<result column="view_cnt" property="viewCnt"/>
-  		<result column="reg_date" property="regDate"/>
-  		<result column="file_name" property="fileName"/>
-  		<result column="file_uri" property="fileUri"/>
+  		<result column="like_cnt" property="likeCnt"/>
+  		<result column="created_at" property="createdAt"/>
   	</resultMap>
   	
-  	<insert id="insertBoard" parameterType="board">
-  		INSERT INTO board VALUES
-  		(0, #{userId}, #{writer}, #{title}, #{content}, 0, 
-  		now(), #{fileName}, #{fileUri})
+  	<insert id="insertPost" parameterType="post">
+  		INSERT INTO post VALUES
+  		(0, #{title}, #{channel}, #{part}, #{videoId}, 0, 0,
+  		now())
   	</insert>
-  	<update id="updateBoard" parameterType="board">
-  		UPDATE board 
+  	<update id="updatePost" parameterType="post">
+  		UPDATE post 
   		SET 
   		title = #{title},
-  		content = #{content},
+  		channel = #{channel},
+  		part = #{part},
+  		video_id = #{videoId},
   		view_cnt = #{viewCnt},
-    	file_name = #{fileName},
-  		file_uri = #{fileUri}
+    	like_cnt = #{likeCnt},
   		WHERE id = #{id}
   	</update>
-  	<delete id="deleteBoard" parameterType="int">
-  		DELETE FROM board WHERE id = #{id}
+  	<delete id="deletePost" parameterType="int">
+  		DELETE FROM post WHERE id = #{id}
   	</delete>
   	
-  	<select id="selectOne" resultMap="boardMap" parameterType="int">
-  		SELECT id, user_id, title, writer, content, view_cnt, 
-  		date_format(reg_date, '%Y년 %m월 %d일 %H시 %i분 %s초') as reg_date,
-  		file_name, file_uri
-  		FROM board
+  	<select id="selectOne" resultMap="postMap" parameterType="int">
+  		SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y-%m-%d %H%i%s') as created_at
+  		FROM post
   		WHERE id = #{id}
   	</select>
   	
   	
-  	<select id="selectList" resultMap="boardMap" parameterType="java.util.HashMap">
-  		SELECT id, user_id, title, writer, content, view_cnt, 
-  		date_format(reg_date, '%Y년 %m월 %d일 %H시 %i분 %s초') as reg_date,
-  		file_name, file_uri
-  		FROM board
+  	<select id="selectList" resultMap="postMap" parameterType="java.util.HashMap">
+  		SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y-%m-%d %H%i%s') as created_at
+  		FROM post
   		<if test="mode == 1">
   			WHERE title LIKE CONCAT('%', #{keyword}, '%')
   		</if>
   		<if test="mode == 2">
-  			WHERE content LIKE '%${keyword}%'
+  			WHERE part LIKE '%${keyword}%'
   		</if>
   		<if test="mode == 3">
   			WHERE title LIKE CONCAT('%', #{keyword}, '%')
-  			OR content LIKE '%${keyword}%'
+  			OR part LIKE '%${keyword}%'
   		</if>
-  	</select> -->
+  	</select> 
+  	<select id="selectPart" resultMap="postMap" parameterType="string">
+  	    SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y-%m-%d %H%i%s') as created_at
+  		FROM post
+  		WHERE part = #{part}	
+  	</select>
   </mapper>
