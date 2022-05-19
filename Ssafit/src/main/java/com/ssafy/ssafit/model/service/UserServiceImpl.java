@@ -2,6 +2,8 @@ package com.ssafy.ssafit.model.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -88,6 +90,16 @@ public class UserServiceImpl implements UserService {
 	public void getout(int id) { // 회원 탈퇴
 		userDao.deleteUser(id);
 	}
+	
+	@Override
+	public Map<String, Object> myPage(int id) { // 회원 상세 조회
+		User user = userDao.selectById(id);
+		Image image = imageDao.selectImage(user.getId());
+		Map<String, Object> ret = new HashMap<>();
+		ret.put("user", user);
+		ret.put("image", image);
+		return ret;
+	}
 }
 
 //
@@ -98,9 +110,4 @@ public class UserServiceImpl implements UserService {
 //	}
 //
 //
-//	@Override
-//	public User myPage(int id) { // 마이페이지 회원 정보
-//		User user = userDao.selectById(id);
-//		return user;
-//	}
 //	

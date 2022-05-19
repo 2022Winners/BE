@@ -15,7 +15,7 @@
 		VALUES(0, #{userId}, #{name}, #{uri})
 	</insert>
 
-<!-- 	<select id="selectImage" resultMap="imageMap" parameterType="int"> -->
-<!-- 		SELECT * FROM image WHERE user_id = #{userId} -->
-<!-- 	</select> -->
+	<select id="selectImage" resultMap="imageMap" parameterType="int">
+		SELECT * FROM image WHERE user_id = #{userId}
+	</select>
 </mapper>

@@ -14,6 +14,9 @@ public interface UserDao {
 	
 	// 유저 삭제
 	void deleteUser(int id);
-//	User selectById(int id);
+	
+	// 유저 아이디로 조회
+	User selectById(int id);
+	
 //	void updateUser(User user);
 }
