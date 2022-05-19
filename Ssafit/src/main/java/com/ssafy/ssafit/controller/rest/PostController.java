@@ -33,8 +33,13 @@ public class PostController {
 	public ResponseEntity<Post> getOne(@PathVariable int id) {
 		return new ResponseEntity<Post>(postService.getOne(id), HttpStatus.OK);
 	}
+	
+	@GetMapping("/posts/{part}")  
+	public ResponseEntity<List<Post>> getPartList(@PathVariable String part) {
+		return new ResponseEntity<List<Post>>(postService.getPartList(part), HttpStatus.OK);
+	}
 
-	@GetMapping("/boards")
+	@GetMapping("/posts")
 	public ResponseEntity<List<Post>> getList(@RequestParam(defaultValue = "") String mode, @RequestParam(defaultValue = "") String keyword) {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("mode", mode);
