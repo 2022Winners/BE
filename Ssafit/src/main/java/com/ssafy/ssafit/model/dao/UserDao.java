@@ -12,8 +12,8 @@ public interface UserDao {
 	// 유저 로그인 아이디로 조회
 	User selectByLoginId(String id);
 	
-	
+	// 유저 삭제
+	void deleteUser(int id);
 //	User selectById(int id);
-//	void deleteUser(int id);
 //	void updateUser(User user);
 }

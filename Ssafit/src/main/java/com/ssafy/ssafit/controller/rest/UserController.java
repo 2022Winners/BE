@@ -3,6 +3,8 @@ package com.ssafy.ssafit.controller.rest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,7 +43,12 @@ public class UserController {
 		userService.update(user);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-	
+
+	@DeleteMapping("/user/{id}") // 회원탈퇴
+	public ResponseEntity<?> getout(@PathVariable int id) {
+		userService.getout(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 //
 //	@GetMapping("/user") // 로그아웃
 //	public ResponseEntity<?> logout(HttpSession session) {
@@ -50,11 +57,6 @@ public class UserController {
 //	}
 //
 //
-//	@DeleteMapping("/user/{id}") // 회원탈퇴
-//	public ResponseEntity<?> getout(@PathVariable int id) {
-//		userService.getout(id);
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
 //
 //	@GetMapping("/user/{id}") // 마이페이지
 //	public ResponseEntity<User> myPage(@PathVariable int id) {

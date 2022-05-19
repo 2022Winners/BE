@@ -33,11 +33,14 @@
 	<select id="selectByLoginId" resultMap="userMap" parameterType="string"> 
 		SELECT * FROM user WHERE login_id = #{loginId} 
 	</select>
+
+	<delete id="deleteUser" parameterType="int"> 
+		DELETE FROM user WHERE id = #{id} 
+	</delete>
 </mapper>
 
 <!-- 
 <select id="selectById" resultMap="userMap" parameterType="int">
 		SELECT * FROM user WHERE id = #{id}
 	</select>
-	<delete id="deleteUser" parameterType="int"> DELETE FROM user WHERE id = 
-	#{id} </delete> -->
+	 -->
