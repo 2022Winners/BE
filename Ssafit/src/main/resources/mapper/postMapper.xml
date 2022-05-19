@@ -27,7 +27,7 @@
   		part = #{part},
   		video_id = #{videoId},
   		view_cnt = #{viewCnt},
-    	like_cnt = #{likeCnt},
+    	like_cnt = #{likeCnt}
   		WHERE id = #{id}
   	</update>
   	<delete id="deletePost" parameterType="int">

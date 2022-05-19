@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,7 +32,7 @@ public class PostController {
 
 	@GetMapping("/post/{id}")
 	public ResponseEntity<Post> getOne(@PathVariable int id) {
-		return new ResponseEntity<Post>(postService.getOne(id), HttpStatus.OK);
+		return new ResponseEntity<Post>(postService.readOne(id), HttpStatus.OK);
 	}
 	
 	@GetMapping("/posts/{part}")  
@@ -46,12 +47,12 @@ public class PostController {
 		params.put("keyword", keyword);
 		return new ResponseEntity<List<Post>>(postService.getList(params), HttpStatus.OK);
 	}
-//	// U
-//	@PutMapping("/board/{id}")
-//	public ResponseEntity<?> update(@PathVariable int id, Post board) {	
-//		boardService.update(board, file);
-//		return new ResponseEntity<>(HttpStatus.OK);
-//	}
+	
+	@PutMapping("/post")  
+	public ResponseEntity<?> update(Post post) {	
+		postService.update(post);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 //	// D
 //	@DeleteMapping("/board/{id}")
 //	public ResponseEntity<?> delete(@PathVariable int id) {
