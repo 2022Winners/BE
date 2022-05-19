@@ -30,8 +30,12 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public void update(Post post) {
-		// TODO Auto-generated method stub
-		
+		Post origin = postDao.selectOne(post.getId());
+		origin.setTitle(post.getTitle());
+		origin.setChannel(post.getChannel());
+		origin.setPart(post.getPart());
+		origin.setVideoId(post.getVideoId());
+		postDao.updatePost(post);
 	}
 
 	@Override
@@ -79,16 +83,7 @@ public class PostServiceImpl implements PostService {
 //
 //	@Autowired
 //	private ServletContext servletContext;
-//	
-//	@Transactional
-//	@Override
-//	public void create(Post board, MultipartFile file) {
-//		// TODO Auto-generated method stub
-//		System.out.println(board.toString());
-//		postDao.insertBoard(saveImg(board, file));
-//		System.out.println(saveImg(board, file).toString());
-//	}
-//
+
 //	@Transactional
 //	@Override
 //	public void update(Post board, MultipartFile file) {
