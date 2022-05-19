@@ -30,12 +30,12 @@
 		WHERE id = #{id} 
 	</update> 
 	
-</mapper>
-
-<!-- 
 	<select id="selectByLoginId" resultMap="userMap" parameterType="string"> 
 		SELECT * FROM user WHERE login_id = #{loginId} 
 	</select>
+</mapper>
+
+<!-- 
 <select id="selectById" resultMap="userMap" parameterType="int">
 		SELECT * FROM user WHERE id = #{id}
 	</select>
