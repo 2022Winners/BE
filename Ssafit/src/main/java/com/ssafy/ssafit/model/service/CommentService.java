@@ -1,23 +1,18 @@
 package com.ssafy.ssafit.model.service;
 
-import java.util.HashMap;
-import java.util.List;
-
-import org.springframework.web.multipart.MultipartFile;
-
-import com.ssafy.ssafit.model.dto.Post;
+import com.ssafy.ssafit.model.dto.Comment;
 
 public interface CommentService {
-//	//글쓰기
-//	void create(Post board, MultipartFile file);
-//	//글수정
-//	void update(Post board, MultipartFile file);
-//	//글삭제
-//	void delete(int id);
-//	//조회수 증가
-//	void updateCnt(int id);
-//	//글 읽기
-//	Post getOne(int id);
-//	//모든게시물 조회
-//	List<Post> getList(HashMap<String, String> params);
+	//댓글 쓰기
+	void create(Comment comment);
+	//댓글 읽기
+	Comment selectOne(int id);
+	//댓글 수정
+	void update(Comment comment);
+	//댓글 삭제
+	void delete(int id);
+	//게시물에 따른 댓글 삭제
+	void deleteByPostId(int postId);
+//	//모든 댓글 조회
+//	List<Comment> getList(HashMap<String, String> params);
 }
