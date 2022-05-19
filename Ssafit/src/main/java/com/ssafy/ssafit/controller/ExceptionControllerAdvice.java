@@ -21,6 +21,7 @@ public class ExceptionControllerAdvice {
 		System.out.println("123333333333");
 		logger.error("Exception 발생 : {}", ex.getMessage());
 		model.addAttribute("msg", ex.getMessage());
+		System.out.println(ex.getMessage());
 		return "error/error";
 	}
 	

@@ -42,8 +42,9 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public void updateViewCnt(int id) {
-		// TODO Auto-generated method stub
-		
+		Post post = postDao.selectOne(id);
+		post.setViewCnt(post.getViewCnt()+1);
+		postDao.updatePost(post);
 	}
 
 	@Override
@@ -54,26 +55,24 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Post getOne(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return postDao.selectOne(id);
 	}
 
 	@Override
 	public Post readOne(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		this.updateViewCnt(id);
+		return postDao.selectOne(id);
 	}
 
 	@Override
 	public List<Post> getList(HashMap<String, String> params) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return postDao.selectList(params);
 	}
 
 	@Override
 	public List<Post> getPartList(String part) {
-		// TODO Auto-generated method stub
-		return null;
+		return postDao.selectPart(part);
 	}
 //	@Autowired
 //	private PostDao postDao;
