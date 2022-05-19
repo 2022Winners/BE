@@ -19,5 +19,5 @@ public interface CommentDao {
 	Post selectOne(int id);
 
 	// 게시글 목록 selectList
-	List<Post> selectList(HashMap<String, String> params);
+//	List<Post> selectList(HashMap<String, String> params);
 }
