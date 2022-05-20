@@ -1,5 +1,6 @@
 package com.ssafy.ssafit.controller.rest;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,19 @@ public class UserController {
 	public ResponseEntity<Map<String, Object>> myPage(@PathVariable int id) {
 		return new ResponseEntity<Map<String, Object>>(userService.myPage(id), HttpStatus.OK);
 	}
+	
+	// R - 내가 팔로우 하는 사람들
+	@GetMapping("/user/ido/{id}")
+	public ResponseEntity<List<User>> getUserListIdo(@PathVariable int id) {
+		return new ResponseEntity<List<User>>(userService.getUserListIdo(id), HttpStatus.OK);
+	}
+	
+	// R - 나를 팔로우 하는 사람들
+	@GetMapping("/user/theydo/{id}")
+	public ResponseEntity<List<User>> getUserListTheydo(@PathVariable int id) {
+		return new ResponseEntity<List<User>>(userService.getUserListtheydo(id), HttpStatus.OK);
+	}
+	
 
 	//
 //	@GetMapping("/user") // 로그아웃

@@ -3,6 +3,7 @@ package com.ssafy.ssafit.model.service;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -100,6 +101,17 @@ public class UserServiceImpl implements UserService {
 		ret.put("image", image);
 		return ret;
 	}
+	
+	@Override
+	public List<User> getUserListIdo(int id) { // 내가 팔로우하는 회원 목록 조회
+		return userDao.selectListbyIdo(id);
+	}
+
+	@Override
+	public List<User> getUserListtheydo(int id) { // 날 팔로우하는 회원 목록 조회
+		return userDao.selectListbyTheydo(id);
+	}
+
 }
 
 //
