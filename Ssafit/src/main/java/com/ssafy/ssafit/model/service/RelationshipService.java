@@ -1,14 +1,13 @@
 package com.ssafy.ssafit.model.service;
 
-import javax.servlet.http.HttpSession;
-
-import com.ssafy.ssafit.model.dto.User;
+import com.ssafy.ssafit.model.dto.Relationship;
 
 public interface RelationshipService {
-//	void join(User user) throws Exception;
-//	void login(HttpSession session, String id, String pw) throws Exception;
-//	void logout(HttpSession session);
-//	void getout(int id);
-//	User myPage(int id);
-//	void update(HttpSession session, User user) throws Exception;
+	
+	// 팔로우
+	void follow(Relationship relationship); 
+	
+	// 언팔로우
+	void unfollow(Relationship relationship); 
+
 }
