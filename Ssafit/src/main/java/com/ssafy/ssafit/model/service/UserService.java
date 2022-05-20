@@ -1,5 +1,6 @@
 package com.ssafy.ssafit.model.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -17,5 +18,9 @@ public interface UserService {
 	
 	Map<String, Object> myPage(int id); // 회원 상세 조회
 
+	List<User> getUserListIdo(int id); // 내가 팔로우하는 회원 목록 조회
+
+	List<User> getUserListtheydo(int id); // 나를 팔로우하는 회원 목록 조회
+	
 	//	void logout(HttpSession session);
 }

@@ -41,5 +41,17 @@
 	<select id="selectById" resultMap="userMap" parameterType="int">
 		SELECT * FROM user WHERE id = #{id}
 	</select>
+	
+	<select id="selectListbyIdo" resultMap="userMap" parameterType="int">
+  		SELECT * FROM user WHERE user.id in (SELECT follow_id
+            								FROM relationship
+            								WHERE user_id = #{id})
+  	</select> 
+
+  	<select id="selectListbyTheydo" resultMap="userMap" parameterType="int">
+  		SELECT * FROM user WHERE user.id in (SELECT user_id
+            								FROM relationship
+            								WHERE follow_id = #{id})
+  	</select> 
 </mapper>
 
