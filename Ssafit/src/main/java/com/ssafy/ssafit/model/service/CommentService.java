@@ -1,18 +1,29 @@
 package com.ssafy.ssafit.model.service;
 
+import java.util.List;
+
 import com.ssafy.ssafit.model.dto.Comment;
 
 public interface CommentService {
-	//댓글 쓰기
+	// 댓글 쓰기
 	void create(Comment comment);
-	//댓글 읽기
-	Comment selectOne(int id);
-	//댓글 수정
+
+	// 댓글 읽기
+	Comment getOne(int id);
+
+	// 댓글 수정
 	void update(Comment comment);
-	//댓글 삭제
+
+	// 댓글 삭제
 	void delete(int id);
-	//게시물에 따른 댓글 삭제
+
+	// 게시물에 따른 댓글 삭제
 	void deleteByPostId(int postId);
-//	//모든 댓글 조회
-//	List<Comment> getList(HashMap<String, String> params);
+
+	// 게시물에 해당하는 모든 댓글 조회
+	List<Comment> getListByPostId(int postId);
+
+	// 유저가 작성한 모든 댓글 조회
+	List<Comment> getListByUserId(int userId);
+
 }
