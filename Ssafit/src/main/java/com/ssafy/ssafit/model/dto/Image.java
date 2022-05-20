@@ -1,5 +1,6 @@
 package com.ssafy.ssafit.model.dto;
 
+
 public class Image {
 	private int id;
 	private int userId;

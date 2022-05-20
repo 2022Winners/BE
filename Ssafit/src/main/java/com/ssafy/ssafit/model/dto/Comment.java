@@ -1,5 +1,6 @@
 package com.ssafy.ssafit.model.dto;
 
+
 public class Comment {
 	private int id;
 	private int userId;

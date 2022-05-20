@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.ssafit.model.dto.Post;
+import com.ssafy.ssafit.model.dto.PostResponse;
 import com.ssafy.ssafit.model.service.PostService;
 
 @RestController
@@ -32,26 +33,31 @@ public class PostController {
 	}
 
 	@GetMapping("/post/{id}")
-	public ResponseEntity<Post> getOne(@PathVariable int id) {
-		return new ResponseEntity<Post>(postService.readOne(id), HttpStatus.OK);
+	public ResponseEntity<PostResponse> getOne(@PathVariable int id, @RequestParam(defaultValue = "0") int userId ) {
+		return new ResponseEntity<PostResponse>(postService.readOne(id, userId), HttpStatus.OK);
 	}
 	
 	@GetMapping("/posts/{part}")  
-	public ResponseEntity<List<Post>> getPartList(@PathVariable String part) {
-		return new ResponseEntity<List<Post>>(postService.getPartList(part), HttpStatus.OK);
+	public ResponseEntity<List<PostResponse>> getPartList(@PathVariable String part, @RequestParam(defaultValue = "0") int userId) {
+		return new ResponseEntity<List<PostResponse>>(postService.getPartList(part, userId), HttpStatus.OK);
 	}
 
 	@GetMapping("/posts")
-	public ResponseEntity<List<Post>> getList(@RequestParam(defaultValue = "") String mode, @RequestParam(defaultValue = "") String keyword) {
+	public ResponseEntity<List<PostResponse>> getList(@RequestParam(defaultValue = "") String mode, @RequestParam(defaultValue = "") String keyword, @RequestParam(defaultValue = "0") int userId) {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("mode", mode);
 		params.put("keyword", keyword);
-		return new ResponseEntity<List<Post>>(postService.getList(params), HttpStatus.OK);
+		return new ResponseEntity<List<PostResponse>>(postService.getList(params,userId), HttpStatus.OK);
+	}
+	
+	@GetMapping("/posts/hot") 
+	public ResponseEntity<List<PostResponse>> getHotList(@RequestParam(defaultValue = "0") int userId) {
+		return new ResponseEntity<List<PostResponse>>(postService.hotList(userId), HttpStatus.OK);
 	}
 	
 	@PutMapping("/post")  
-	public ResponseEntity<?> update(Post post) {	
-		postService.update(post);
+	public ResponseEntity<?> update(PostResponse postResponse) {	
+		postService.update(postResponse);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	

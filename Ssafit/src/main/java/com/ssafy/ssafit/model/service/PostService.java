@@ -3,18 +3,19 @@ package com.ssafy.ssafit.model.service;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import com.ssafy.ssafit.model.dto.Post;
+import com.ssafy.ssafit.model.dto.PostResponse;
 
 public interface PostService {
 	void create(Post post);
-	void update(Post post);
+	void update(PostResponse postResponse);
 	void delete(int id);
 	void updateViewCnt(int id);
-	void updateLikeCnt(int id);
+	void plusLikeCnt(int id); // 좋아요 수 증가
+	void minusLikeCnt(int id); // 좋아요 수 감소
 	Post getOne(int id); // 수정, 삭제 시 가져오는 것
-	Post readOne(int id); // 실제로 사용자가 원하는 영상게시물
-	List<Post> getList(HashMap<String, String> params);
-	List<Post> getPartList(String part);
+	PostResponse readOne(int id, int userId); // 실제로 사용자가 원하는 영상게시물
+	List<PostResponse> getList(HashMap<String, String> params, int userId);
+	List<PostResponse> getPartList(String part, int userId);
+	List<PostResponse> hotList(int userId);
 }

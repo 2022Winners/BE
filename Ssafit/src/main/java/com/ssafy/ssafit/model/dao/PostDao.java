@@ -23,4 +23,7 @@ public interface PostDao {
 	
 	// 파트별 영상 조회
 	List<Post> selectPart(String part);
+	
+	//탑 8개 영상 조회
+	List<Post> HotList();
 }

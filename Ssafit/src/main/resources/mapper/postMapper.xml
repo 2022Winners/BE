@@ -54,10 +54,17 @@
   			WHERE title LIKE CONCAT('%', #{keyword}, '%')
   			OR part LIKE '%${keyword}%'
   		</if>
+  		ORDER BY created_at	DESC
   	</select> 
   	<select id="selectPart" resultMap="postMap" parameterType="string">
   	    SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y-%m-%d %H%i%s') as created_at
   		FROM post
-  		WHERE part = #{part}	
+  		WHERE part = #{part}
+  		ORDER BY created_at	DESC
+  	</select>
+  		<select id="HotList" resultMap="postMap" >
+  	    SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y-%m-%d %H%i%s') as created_at
+  		FROM post
+  		ORDER BY view_cnt DESC limit 8	
   	</select>
   </mapper>
