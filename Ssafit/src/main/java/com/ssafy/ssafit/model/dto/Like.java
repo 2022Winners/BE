@@ -9,12 +9,6 @@ public class Like {
 
 	}
 
-	public Like(int id, int userId, int postId) {
-		this.id = id;
-		this.userId = userId;
-		this.postId = postId;
-	}
-	
 	public int getId() {
 		return id;
 	}
