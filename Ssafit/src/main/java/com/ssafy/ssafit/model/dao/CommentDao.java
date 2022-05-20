@@ -11,10 +11,10 @@ public interface CommentDao {
 	// 댓글 조회 selectOne
 	Comment selectOne(int id);
 
-	// 게시물에 해당하는 댓글 목록 selectLisByPostId
+	// 게시물에 해당하는 댓글 목록 selectListByPostId
 	List<Comment> selectListByPostId(int postId);
 
-	// 유저가 작성한 모든 댓글 목록 selectLisByUserId
+	// 유저가 작성한 모든 댓글 목록 selectListByUserId
 	List<Comment> selectListByUserId(int userId);
 		
 	// 댓글 수정 update

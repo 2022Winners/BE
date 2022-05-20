@@ -3,6 +3,7 @@ package com.ssafy.ssafit.model.service;
 import java.util.List;
 
 import com.ssafy.ssafit.model.dto.Comment;
+import com.ssafy.ssafit.model.dto.CommentResponse;
 
 public interface CommentService {
 	// 댓글 쓰기
@@ -21,7 +22,7 @@ public interface CommentService {
 	void deleteByPostId(int postId);
 
 	// 게시물에 해당하는 모든 댓글 조회
-	List<Comment> getListByPostId(int postId);
+	List<CommentResponse> getListByPostId(int postId);
 
 	// 유저가 작성한 모든 댓글 조회
 	List<Comment> getListByUserId(int userId);

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ssafy.ssafit.model.dto.Comment;
+import com.ssafy.ssafit.model.dto.CommentResponse;
 import com.ssafy.ssafit.model.service.CommentService;
 
 @RestController
@@ -30,16 +31,10 @@ public class CommentController {
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	// R - One
-	@GetMapping("/comment/{id}")
-	public ResponseEntity<Comment> getOne(@PathVariable int id) {
-		return new ResponseEntity<Comment>(commentService.getOne(id), HttpStatus.OK);
-	}
-
 	// R - List ( PostId )
 	@GetMapping("/comments/post/{postId}")
-	public ResponseEntity<List<Comment>> getListByPostId(@PathVariable int postId) {
-		return new ResponseEntity<List<Comment>>(commentService.getListByPostId(postId), HttpStatus.OK);
+	public ResponseEntity<List<CommentResponse>> getListByPostId(@PathVariable int postId) {
+		return new ResponseEntity<List<CommentResponse>>(commentService.getListByPostId(postId), HttpStatus.OK);
 	}
 
 	// R - List ( UserId )
@@ -55,8 +50,8 @@ public class CommentController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	// D
-	@DeleteMapping("/comment/{id}")
+	// D // todo : isDeleted 추가 필요, 내용 ="삭제된댓글입니다"로 변경
+	@PutMapping("/comment/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable int id) {
 		commentService.delete(id);
 		return new ResponseEntity<>(HttpStatus.OK);
