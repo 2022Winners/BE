@@ -1,23 +1,25 @@
 package com.ssafy.ssafit.model.service;
 
-import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
-
-import com.ssafy.ssafit.model.dto.Post;
+import com.ssafy.ssafit.model.dto.Reply;
 
 public interface ReplyService {
-//	//글쓰기
-//	void create(Post board, MultipartFile file);
-//	//글수정
-//	void update(Post board, MultipartFile file);
-//	//글삭제
-//	void delete(int id);
-//	//조회수 증가
-//	void updateCnt(int id);
-//	//글 읽기
-//	Post getOne(int id);
-//	//모든게시물 조회
-//	List<Post> getList(HashMap<String, String> params);
+	// 대댓글 쓰기
+	void create(Reply reply);
+
+	// 대댓글 읽기
+	Reply getOne(int id);
+
+	// 대댓글 수정
+	void update(Reply reply);
+
+	// 대댓글 삭제
+	void delete(int id);
+
+	// 게시물에 따른 대댓글 삭제
+	void deleteByPostId(int postId);
+
+	// 댓글에 해당하는 모든 대댓글 조회
+	List<Reply> getListByCommentId(int postId);
 }
