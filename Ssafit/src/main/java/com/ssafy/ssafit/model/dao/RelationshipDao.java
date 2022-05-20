@@ -1,23 +1,13 @@
 package com.ssafy.ssafit.model.dao;
 
-import java.util.HashMap;
-import java.util.List;
-
-import com.ssafy.ssafit.model.dto.Post;
+import com.ssafy.ssafit.model.dto.Relationship;
 
 public interface RelationshipDao {
-	// 게시글 수정 update
-	void updateBoard(Post board);
 
-	// 게시글 삭제 delete
-	void deleteBoard(int id);
-
-	// 게시글 추가 insert
-	void insertBoard(Post board);
-
-	// 게시글 조회 selectOne
-	Post selectOne(int id);
-
-	// 게시글 목록 selectList
-	List<Post> selectList(HashMap<String, String> params);
+	// 관계 추가 insert
+	void insertRelation(Relationship relationship);
+	
+	// 관계 삭제 delete
+	void deleteRelation(Relationship relationship);
+	
 }
