@@ -12,26 +12,52 @@
 	</resultMap>
 
 	<insert id="insertComment" parameterType="comment">
-		INSERT INTO comment VALUES
+		INSERT INTO comment
+		VALUES
 		(0, #{userId}, #{postId}, #{content}, now())
 	</insert>
+	
 	<update id="updateComment" parameterType="comment">
 		UPDATE comment
 		SET
 		content = #{content}
 		WHERE id = #{id}
 	</update>
+	
 	<delete id="deleteComment" parameterType="int">
-		DELETE FROM comment WHERE id = #{id}
+		DELETE FROM comment
+		WHERE id = #{id}
 	</delete>
+	
 	<delete id="deleteCommentByPostId" parameterType="int">
-		DELETE FROM comment WHERE post_id = #{postId}
+		DELETE FROM
+		comment WHERE post_id = #{postId}
 	</delete>
 
-	<select id="selectOne" resultMap="commentMap" parameterType="int">
+	<select id="selectOne" resultMap="commentMap"
+		parameterType="int">
 		SELECT id, user_id, post_id, content,
 		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
-		FROM comment
+		FROM
+		comment
 		WHERE id = #{id}
+	</select>
+
+	<select id="selectListByPostId" resultMap="commentMap"
+		parameterType="int">
+		SELECT id, user_id, post_id, content,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		FROM
+		comment
+		WHERE post_id = #{postId}
+	</select>
+
+	<select id="selectListByUserId" resultMap="commentMap"
+		parameterType="int">
+		SELECT id, user_id, post_id, content,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		FROM
+		comment
+		WHERE user_id = #{userId}
 	</select>
 </mapper>

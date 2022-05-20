@@ -1,5 +1,7 @@
 package com.ssafy.ssafit.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +22,7 @@ public class CommentServiceImpl implements CommentService{
 	}
 
 	@Override
-	public Comment selectOne(int id) {
+	public Comment getOne(int id) {
 		return commentDao.selectOne(id);
 	}
 
@@ -39,5 +41,15 @@ public class CommentServiceImpl implements CommentService{
 	@Override
 	public void deleteByPostId(int postId) {
 		commentDao.deleteCommentByPostId(postId);
+	}
+
+	@Override
+	public List<Comment> getListByPostId(int postId) {
+		return commentDao.selectListByPostId(postId);
+	}
+
+	@Override
+	public List<Comment> getListByUserId(int userId) {
+		return commentDao.selectListByUserId(userId);
 	}
 }
