@@ -1,22 +1,23 @@
 package com.ssafy.ssafit.model.dto;
 
-
 public class Comment {
 	private int id;
 	private int userId;
 	private int postId;
 	private String content;
+	private boolean isDeleted;
 	private String createdAt;
 
 	public Comment() {
 
 	}
 
-	public Comment(int id, int userId, int postId, String content, String createdAt) {
+	public Comment(int id, int userId, int postId, String content, boolean isDeleted, String createdAt) {
 		this.id = id;
 		this.userId = userId;
 		this.postId = postId;
 		this.content = content;
+		this.isDeleted = isDeleted;
 		this.createdAt = createdAt;
 	}
 
@@ -52,6 +53,14 @@ public class Comment {
 		this.content = content;
 	}
 
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	public String getCreatedAt() {
 		return createdAt;
 	}
@@ -63,7 +72,7 @@ public class Comment {
 	@Override
 	public String toString() {
 		return "Comment [id=" + id + ", userId=" + userId + ", postId=" + postId + ", content=" + content
-				+ ", createdAt=" + createdAt + "]";
+				+ ", isDeleted=" + isDeleted + ", createdAt=" + createdAt + "]";
 	}
 
 }

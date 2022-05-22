@@ -11,6 +11,12 @@
 		<result column="content" property="content" />
 		<result column="created_at" property="createdAt" />
 	</resultMap>
+	
+	<resultMap type="myComment" id="myCommentMap">
+		<result column="post_id" property="postId" />
+		<result column="content" property="content" />
+		<result column="created_at" property="createdAt" />
+	</resultMap>
 
 	<insert id="insertReply" parameterType="reply">
 		INSERT INTO reply
@@ -51,5 +57,20 @@
 		FROM
 		reply
 		WHERE comment_id = #{commentId}
+	</select>
+	
+		
+	<select id="selectListByUserId" resultMap="myCommentMap"
+		parameterType="int">
+		SELECT post_id, content, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		FROM
+		comment
+		WHERE user_id = #{userId} AND is_deleted = false
+		UNION ALL
+		SELECT post_id, content, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		FROM
+		reply
+		WHERE user_id = #{userId}
+		ORDER BY created_at DESC, post_id ASC
 	</select>
  </mapper>

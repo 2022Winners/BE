@@ -2,6 +2,7 @@ package com.ssafy.ssafit.model.dao;
 
 import java.util.List;
 
+import com.ssafy.ssafit.model.dto.MyComment;
 import com.ssafy.ssafit.model.dto.Reply;
 
 public interface ReplyDao {
@@ -22,4 +23,7 @@ public interface ReplyDao {
 
 	// 게시물 삭제에 따른 대댓글 삭제 delete
 	void deleteReplyByPostId(int postId);
+	
+	// 해당 유저가 작성한 댓글 + 대댓글 목록 selectListByUserId
+	List<MyComment> selectListByUserId(int userId);
 }
