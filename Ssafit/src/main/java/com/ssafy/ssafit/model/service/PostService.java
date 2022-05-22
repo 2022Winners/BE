@@ -18,4 +18,7 @@ public interface PostService {
 	List<PostResponse> getList(HashMap<String, String> params, int userId);
 	List<PostResponse> getPartList(String part, int userId);
 	List<PostResponse> hotList(int userId);
+	List<PostResponse> genderTop(int gender, int userId);
+	List<PostResponse> ageTop(int age, int userId);
+
 }

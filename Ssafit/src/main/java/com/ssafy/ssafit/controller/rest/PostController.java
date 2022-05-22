@@ -66,6 +66,19 @@ public class PostController {
 		postService.delete(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
+	
+	//성별 좋아요 누른 영상 top 순위 4개 가져오기
+	@GetMapping("/posts/hotgender/{gender}")  
+	public ResponseEntity<List<PostResponse>> getGenderList(@PathVariable int gender, @RequestParam int userId) {
+		return new ResponseEntity<List<PostResponse>>(postService.genderTop(gender, userId), HttpStatus.OK);
+	}
+		
+	//나이별 좋아요 누른 영상 top 순위 4개 가져오기
+	@GetMapping("/posts/hotage/{age}")  
+	public ResponseEntity<List<PostResponse>> getageList(@PathVariable int age, @RequestParam int userId) {
+		return new ResponseEntity<List<PostResponse>>(postService.ageTop(age, userId), HttpStatus.OK);
+	}
+
 }
 
 

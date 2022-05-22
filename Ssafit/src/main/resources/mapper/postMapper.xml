@@ -67,4 +67,28 @@
   		FROM post
   		ORDER BY view_cnt DESC limit 8	
   	</select>
+  	
+  	<select id="genderTop" resultMap="postMap" parameterType="int">
+  	    SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y-%m-%d %H%i%s') as created_at
+  		FROM post
+  		where id in (SELECT DISTINCT post_id
+                     from `like`
+                     where user_id in (select id
+                                      from user
+                                       where gender = #{gender}))
+        ORDER BY like_cnt DESC LIMIT 4;
+  	</select>
+  	<select id="ageTop" resultMap="postMap" parameterType="int">
+  	    SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y-%m-%d %H%i%s') as created_at
+  		FROM post
+  		where id in (SELECT DISTINCT post_id
+                     from `like`
+                     where user_id in (select id
+                                       from user
+                                       where age = #{age}))
+        ORDER BY like_cnt DESC LIMIT 4;
+  	</select>
+  	
+  	
+  	
   </mapper>

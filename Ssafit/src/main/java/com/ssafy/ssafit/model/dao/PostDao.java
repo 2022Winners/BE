@@ -26,4 +26,11 @@ public interface PostDao {
 	
 	//탑 8개 영상 조회
 	List<Post> HotList();
+	
+	//성별 좋아요 누른 영상 탑 순위
+	List<Post> genderTop(int gender);
+		
+	//나이별 좋아요 누른 영상 탑 순위
+	List<Post> ageTop(int age);
+
 }
