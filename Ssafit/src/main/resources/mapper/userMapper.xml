@@ -16,11 +16,14 @@
 		<result column="created_at" property="createdAt" />
 	</resultMap>
 
-	<insert id="insertUser" parameterType="java.util.HashMap" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertUser" parameterType="java.util.HashMap">
 		INSERT INTO user
 		(`image_id`, `login_id`, `login_pw`, `nickname`, `email`, `gender`,`age`, `role`)
 		VALUES
 		(#{imageId}, #{loginId}, #{loginPw}, #{nickname}, #{email}, #{gender}, #{age}, #{role})
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+        	SELECT LAST_INSERT_ID()
+    	</selectKey>
 	</insert>
 		
 	<update id="updateUser" parameterType="user"> 

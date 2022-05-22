@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ssafy.ssafit.model.dto.User;
+import com.ssafy.ssafit.model.service.FileUploadService;
 import com.ssafy.ssafit.model.service.UserService;
 
 @RestController
