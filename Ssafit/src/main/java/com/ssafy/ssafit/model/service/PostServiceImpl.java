@@ -123,4 +123,33 @@ public class PostServiceImpl implements PostService {
 		}
 		return responseList;
 	}
+	
+	@Override
+	public List<PostResponse> genderTop(int gender, int userId) {
+		List<PostResponse> responseList = new ArrayList<>();
+		List<Post> genderTop = postDao.genderTop(gender);
+		for(int i = 0; i < genderTop.size(); i++) {
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			map.put("userId", userId);
+			map.put("postId", genderTop.get(i).getId());
+			PostResponse rp = PostResponse.build(genderTop.get(i), likeDao.userLikeVideo(map)==1?true:false);
+			responseList.add(rp);
+		}
+		return responseList;
+	}
+
+	@Override
+	public List<PostResponse> ageTop(int age, int userId) {
+		List<PostResponse> responseList = new ArrayList<>();
+		List<Post> ageTop = postDao.ageTop(age);
+		for(int i = 0; i < ageTop.size(); i++) {
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			map.put("userId", userId);
+			map.put("postId", ageTop.get(i).getId());
+			PostResponse rp = PostResponse.build(ageTop.get(i), likeDao.userLikeVideo(map)==1?true:false);
+			responseList.add(rp);
+		}
+		return responseList;
+	}
+
 }
