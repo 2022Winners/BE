@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.ssafit.model.dao.ReplyDao;
+import com.ssafy.ssafit.model.dto.MyComment;
 import com.ssafy.ssafit.model.dto.Reply;
 
 @Service
@@ -40,14 +41,8 @@ public class ReplyServiceImpl implements ReplyService {
 		replyDao.deleteReply(id);
 	}
 
-	@Transactional
 	@Override
-	public void deleteByPostId(int postId) {
-		replyDao.deleteReplyByPostId(postId);
-	}
-
-	@Override
-	public List<Reply> getListByCommentId(int commentId) {
-		return replyDao.selectListByCommentId(commentId);
+	public List<MyComment> getListByUserId(int userId) {
+		return replyDao.selectListByUserId(userId);
 	}
 }

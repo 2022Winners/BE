@@ -46,9 +46,11 @@ public class CommentServiceImpl implements CommentService{
 		commentDao.deleteComment(id);	
 	}
 
+	// TODO: post에 기능이 합쳐질 경우, 삭제 예정
 	@Transactional
 	@Override
 	public void deleteByPostId(int postId) {
+		replyDao.deleteReplyByPostId(postId);
 		commentDao.deleteCommentByPostId(postId);
 	}
 
@@ -62,10 +64,5 @@ public class CommentServiceImpl implements CommentService{
 			commentResponses.add(comment);
 		}
 		return commentResponses;
-	}
-
-	@Override
-	public List<Comment> getListByUserId(int userId) {
-		return commentDao.selectListByUserId(userId);
 	}
 }

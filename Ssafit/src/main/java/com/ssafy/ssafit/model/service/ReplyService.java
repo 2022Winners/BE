@@ -2,6 +2,7 @@ package com.ssafy.ssafit.model.service;
 
 import java.util.List;
 
+import com.ssafy.ssafit.model.dto.MyComment;
 import com.ssafy.ssafit.model.dto.Reply;
 
 public interface ReplyService {
@@ -16,10 +17,7 @@ public interface ReplyService {
 
 	// 대댓글 삭제
 	void delete(int id);
-
-	// 게시물에 따른 대댓글 삭제
-	void deleteByPostId(int postId);
-
-	// 댓글에 해당하는 모든 대댓글 조회
-	List<Reply> getListByCommentId(int postId);
+	
+	// 해당 유저가 작성한 모든 댓글 + 대댓글 목록
+	List<MyComment> getListByUserId(int userId);
 }

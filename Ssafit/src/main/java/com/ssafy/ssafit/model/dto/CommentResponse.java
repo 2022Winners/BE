@@ -7,6 +7,7 @@ public class CommentResponse {
 	private int userId;
 	private int postId;
 	private String content;
+	private boolean isDeleted;
 	private String createdAt;
 	private List<Reply> replyList;
 
@@ -16,24 +17,27 @@ public class CommentResponse {
 		cr.setUserId(comment.getUserId());
 		cr.setPostId(comment.getPostId());
 		cr.setContent(comment.getContent());
+		cr.setDeleted(comment.isDeleted());
 		cr.setCreatedAt(comment.getCreatedAt());
 		cr.setReplyList(replys);
 		return cr;
 	}
-	
+
 	private CommentResponse() {
 
 	}
 
-	private CommentResponse(int id, int userId, int postId, String content, String createdAt, List<Reply> replyList) {
+	private CommentResponse(int id, int userId, int postId, String content, boolean isDeleted, String createdAt,
+			List<Reply> replyList) {
 		this.id = id;
 		this.userId = userId;
 		this.postId = postId;
 		this.content = content;
+		this.isDeleted = isDeleted;
 		this.createdAt = createdAt;
 		this.replyList = replyList;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
@@ -66,6 +70,14 @@ public class CommentResponse {
 		this.content = content;
 	}
 
+	public boolean isDeleted() {
+		return isDeleted;
+	}
+
+	public void setDeleted(boolean isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+
 	public String getCreatedAt() {
 		return createdAt;
 	}
@@ -85,7 +97,7 @@ public class CommentResponse {
 	@Override
 	public String toString() {
 		return "CommentResponse [id=" + id + ", userId=" + userId + ", postId=" + postId + ", content=" + content
-				+ ", createdAt=" + createdAt + ", replyList=" + replyList + "]";
+				+ ", isDeleted=" + isDeleted + ", createdAt=" + createdAt + ", replyList=" + replyList + "]";
 	}
-	
+
 }

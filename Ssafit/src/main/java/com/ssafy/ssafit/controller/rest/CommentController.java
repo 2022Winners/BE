@@ -37,12 +37,6 @@ public class CommentController {
 		return new ResponseEntity<List<CommentResponse>>(commentService.getListByPostId(postId), HttpStatus.OK);
 	}
 
-	// R - List ( UserId )
-	@GetMapping("/comments/user/{userId}")
-	public ResponseEntity<List<Comment>> getListByUserId(@PathVariable int userId) {
-		return new ResponseEntity<List<Comment>>(commentService.getListByUserId(userId), HttpStatus.OK);
-	}
-
 	// U
 	@PutMapping("/comment/{id}")
 	public ResponseEntity<?> update(@PathVariable int id, Comment comment) {
