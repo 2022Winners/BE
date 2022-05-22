@@ -10,9 +10,12 @@
 		<result column="uri" property="uri" />
 	</resultMap>
 	
-	<insert id="insertImage" parameterType="image" useGeneratedKeys="true" keyProperty="id">
+	<insert id="insertImage" parameterType="image">
 		INSERT INTO image
 		VALUES(0, #{userId}, #{name}, #{uri})
+		<selectKey resultType="int" keyProperty="id" order="AFTER">
+        	SELECT LAST_INSERT_ID()
+    	</selectKey>
 	</insert>
 
 	<select id="selectImage" resultMap="imageMap" parameterType="int">
