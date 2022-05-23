@@ -31,10 +31,4 @@ public class LikeServiceImpl implements LikeService {
 		postService.minusLikeCnt(like.getPostId());	
 	}
 
-	@Override
-	public List<Like> LikeList(int userId) {
-		List<Like> list = likeDao.selectLikePost(userId);
-		return list;
-	}
-
 }

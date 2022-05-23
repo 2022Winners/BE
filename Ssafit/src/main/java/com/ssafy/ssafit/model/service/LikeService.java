@@ -10,7 +10,6 @@ public interface LikeService {
 	void insert(Like like);
 	//좋아요 삭제
 	void delete(Like like);
-	//유저가 좋아요 누른 영상 리스트 불러오기
-	List<Like> LikeList(int userId);
+
 	
 }

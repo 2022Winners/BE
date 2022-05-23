@@ -8,9 +8,12 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.BeanDefinitionDsl.BeanSupplierContext;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.ssafy.ssafit.model.dao.CommentDao;
 import com.ssafy.ssafit.model.dao.LikeDao;
 import com.ssafy.ssafit.model.dao.PostDao;
+import com.ssafy.ssafit.model.dao.ReplyDao;
 import com.ssafy.ssafit.model.dto.Like;
 import com.ssafy.ssafit.model.dto.Post;
 import com.ssafy.ssafit.model.dto.PostResponse;
@@ -38,10 +41,11 @@ public class PostServiceImpl implements PostService {
 		origin.setVideoId(postResponse.getVideoId());
 		postDao.updatePost(origin);
 	}
-
+    
+	@Transactional
 	@Override
 	public void delete(int id) {
-		postDao.deletePost(id);		
+		postDao.deletePost(id);	
 	}
 
 	@Override
@@ -85,7 +89,7 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public List<PostResponse> getPartList(String part, int userId) {	
 		List<PostResponse> responseList = new ArrayList<>();
-		List<Post> partList = postDao.selectPart(part);
+		List<Post> partList = postDao.selectListByPart(part);
 		for(int i = 0; i < partList.size(); i++) {
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
 			map.put("userId", userId);
@@ -111,9 +115,9 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<PostResponse> hotList(int userId) {
+	public List<PostResponse> getTopList(int userId) {
 		List<PostResponse> responseList = new ArrayList<>();
-		List<Post> hotList = postDao.HotList();
+		List<Post> hotList = postDao.selectTopList();
 		for(int i = 0; i < hotList.size(); i++) {
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
 			map.put("userId", userId);
@@ -125,9 +129,9 @@ public class PostServiceImpl implements PostService {
 	}
 	
 	@Override
-	public List<PostResponse> genderTop(int gender, int userId) {
+	public List<PostResponse> getGenderTopList(int userId) {
 		List<PostResponse> responseList = new ArrayList<>();
-		List<Post> genderTop = postDao.genderTop(gender);
+		List<Post> genderTop = postDao.selectTopListByGender(userId);
 		for(int i = 0; i < genderTop.size(); i++) {
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
 			map.put("userId", userId);
@@ -139,14 +143,28 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<PostResponse> ageTop(int age, int userId) {
+	public List<PostResponse> getAgeTopList(int userId) {
 		List<PostResponse> responseList = new ArrayList<>();
-		List<Post> ageTop = postDao.ageTop(age);
+		List<Post> ageTop = postDao.selectTopListByAge(userId);
 		for(int i = 0; i < ageTop.size(); i++) {
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
 			map.put("userId", userId);
 			map.put("postId", ageTop.get(i).getId());
 			PostResponse rp = PostResponse.build(ageTop.get(i), likeDao.userLikeVideo(map)==1?true:false);
+			responseList.add(rp);
+		}
+		return responseList;
+	}
+
+	@Override
+	public List<PostResponse> getUserLikeList(int userId) {
+		List<PostResponse> responseList = new ArrayList<>();
+		List<Post> userLike = postDao.selectUserLikeList(userId);
+		for(int i = 0; i < userLike.size(); i++) {
+			HashMap<String, Integer> map = new HashMap<String, Integer>();
+			map.put("userId", userId);
+			map.put("postId", userLike.get(i).getId());
+			PostResponse rp = PostResponse.build(userLike.get(i), true);
 			responseList.add(rp);
 		}
 		return responseList;

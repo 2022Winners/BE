@@ -22,15 +22,18 @@ public interface PostDao {
 	List<Post> selectList(HashMap<String, String> params);
 	
 	// 파트별 영상 조회
-	List<Post> selectPart(String part);
+	List<Post> selectListByPart(String part);
 	
 	//탑 8개 영상 조회
-	List<Post> HotList();
+	List<Post> selectTopList();
 	
 	//성별 좋아요 누른 영상 탑 순위
-	List<Post> genderTop(int gender);
+	List<Post> selectTopListByGender(int userId);
 		
 	//나이별 좋아요 누른 영상 탑 순위
-	List<Post> ageTop(int age);
+	List<Post> selectTopListByAge(int userId);
+	
+	//해당 유저가 좋아요 누른 영상 리스트
+	List<Post> selectUserLikeList(int userId);
 
 }
