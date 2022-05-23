@@ -1,14 +1,9 @@
 package com.ssafy.ssafit.model.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.ssafy.ssafit.model.dao.LikeDao;
-import com.ssafy.ssafit.model.dao.PostDao;
 import com.ssafy.ssafit.model.dto.Like;
-import com.ssafy.ssafit.model.dto.Post;
 
 @Service
 public class LikeServiceImpl implements LikeService {

@@ -4,17 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.support.BeanDefinitionDsl.BeanSupplierContext;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.ssafy.ssafit.model.dao.CommentDao;
 import com.ssafy.ssafit.model.dao.LikeDao;
 import com.ssafy.ssafit.model.dao.PostDao;
-import com.ssafy.ssafit.model.dao.ReplyDao;
-import com.ssafy.ssafit.model.dto.Like;
 import com.ssafy.ssafit.model.dto.Post;
 import com.ssafy.ssafit.model.dto.PostResponse;
 

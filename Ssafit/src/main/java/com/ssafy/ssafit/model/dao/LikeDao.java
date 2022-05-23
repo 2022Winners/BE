@@ -1,10 +1,8 @@
 package com.ssafy.ssafit.model.dao;
 
 import java.util.HashMap;
-import java.util.List;
 
 import com.ssafy.ssafit.model.dto.Like;
-import com.ssafy.ssafit.model.dto.Post;
 
 public interface LikeDao {	
 	// 좋아요 등록
