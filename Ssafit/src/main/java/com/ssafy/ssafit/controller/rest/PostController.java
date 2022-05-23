@@ -56,21 +56,21 @@ public class PostController {
 	}
 	
 	@ApiOperation(value = "조회순 영상 List 불러오기", notes = "높은 조회순으로 영상 List 불러오기 (userId를 입력하여 해당 유저가 좋아요 눌렀는지 판단)")
-	@GetMapping("/posts/hot") 
+	@GetMapping("/posts/top") 
 	public ResponseEntity<List<PostResponse>> getTopList(@RequestParam(defaultValue = "0") int userId) {
 		return new ResponseEntity<List<PostResponse>>(postService.getTopList(userId), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "성별 좋아요 순 영상 List 불러오기", notes = "userId로 해당 유저와 같은 성별을 가진 유저들이 좋아하는 post list 불러오기 (userId를 입력하여 해당 유저가 좋아요 눌렀는지 판단)")
 	//성별 좋아요 누른 영상 top 순위 4개 가져오기
-	@GetMapping("/posts/hotgender")  
+	@GetMapping("/posts/gender")  
 	public ResponseEntity<List<PostResponse>> getGenderList(@RequestParam int userId) {
 		return new ResponseEntity<List<PostResponse>>(postService.getGenderTopList(userId), HttpStatus.OK);
 	}
 	
 	@ApiOperation(value = "나이별 좋아요 순 영상 List 불러오기", notes = "userId로 해당 유저와 같은 나이대를 가진 유저들이 좋아하는 post list 불러오기 (userId를 입력하여 해당 유저가 좋아요 눌렀는지 판단)")
 	//나이별 좋아요 누른 영상 top 순위 4개 가져오기
-	@GetMapping("/posts/hotage")  
+	@GetMapping("/posts/age")  
 	public ResponseEntity<List<PostResponse>> getAgeList(@RequestParam int userId) {
 		return new ResponseEntity<List<PostResponse>>(postService.getAgeTopList(userId), HttpStatus.OK);
 	}
@@ -90,7 +90,7 @@ public class PostController {
 	}
 	
 	@ApiOperation(value = "user가 좋아하는 영상 list 불러오기", notes = "userId값을 입력받아 해당 유저가 좋아하는 영상 리스트 불러오기")
-	@GetMapping("/post/userlike")
+	@GetMapping("/posts/like")
 	public ResponseEntity<List<PostResponse>> getUserLike(@RequestParam int userId) {
 		return new ResponseEntity<List<PostResponse>>(postService.getUserLikeList(userId), HttpStatus.OK);
 	}
