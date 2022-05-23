@@ -24,5 +24,4 @@ public class RelationshipServiceImpl implements RelationshipService {
 	public void unfollow(Relationship relationship) {
 		relationDao.deleteRelation(relationship);
 	}
-
 }

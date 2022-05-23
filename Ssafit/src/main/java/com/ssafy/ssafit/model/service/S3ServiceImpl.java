@@ -2,8 +2,6 @@ package com.ssafy.ssafit.model.service;
 
 import java.io.InputStream;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3;

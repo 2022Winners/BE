@@ -22,16 +22,12 @@ public class SwaggerConfig {
 				// ApiSelectorBuilder
 				.paths(PathSelectors.ant("/api/**"))
 				// Docket
-				.build()
-				.apiInfo(apiInfo());
+				.build().apiInfo(apiInfo());
 	}
-	
+
 	private ApiInfo apiInfo() {
 		return new ApiInfoBuilder()
-				//  ApiInfoBuilder
-				.title("SSAFY 최종관통PJT SSAFIT Backend API")
-				.description("SSAFIT REST API 테스트")
-				.version("1.0")
-				.build();
+				// ApiInfoBuilder
+				.title("SSAFY 최종관통PJT SSAFIT Backend API").description("SSAFIT REST API 테스트").version("1.0").build();
 	}
 }

@@ -28,5 +28,4 @@ public interface UserDao {
 
 	// 나를 팔로우 한 사람들 목록 조회
 	List<User> selectFollowerList(int id);
-
 }

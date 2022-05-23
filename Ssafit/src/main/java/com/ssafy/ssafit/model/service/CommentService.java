@@ -14,7 +14,7 @@ public interface CommentService {
 
 	// 댓글 수정
 	void update(Comment comment);
-		
+
 	// 댓글 삭제
 	void delete(int id);
 

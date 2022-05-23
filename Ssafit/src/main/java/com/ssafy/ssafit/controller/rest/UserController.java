@@ -83,5 +83,4 @@ public class UserController {
 	public ResponseEntity<List<User>> getUserListTheydo(@PathVariable int id) {
 		return new ResponseEntity<List<User>>(userService.getFollowerList(id), HttpStatus.OK);
 	}
-
 }

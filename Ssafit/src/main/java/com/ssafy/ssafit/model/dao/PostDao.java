@@ -20,20 +20,20 @@ public interface PostDao {
 
 	// 영상 게시글 목록 selectList
 	List<Post> selectList(HashMap<String, String> params);
-	
+
 	// 파트별 영상 조회
 	List<Post> selectListByPart(String part);
-	
-	//탑 8개 영상 조회
+
+	// 탑 8개 영상 조회
 	List<Post> selectTopList();
-	
-	//성별 좋아요 누른 영상 탑 순위
+
+	// 성별 좋아요 누른 영상 탑 순위
 	List<Post> selectTopListByGender(int userId);
-		
-	//나이별 좋아요 누른 영상 탑 순위
+
+	// 나이별 좋아요 누른 영상 탑 순위
 	List<Post> selectTopListByAge(int userId);
-	
-	//해당 유저가 좋아요 누른 영상 리스트
+
+	// 해당 유저가 좋아요 누른 영상 리스트
 	List<Post> selectUserLikeList(int userId);
 
 }

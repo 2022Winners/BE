@@ -18,52 +18,68 @@
 
 	<insert id="insertUser" parameterType="java.util.HashMap">
 		INSERT INTO user
-		(`image_id`, `login_id`, `login_pw`, `nickname`, `email`, `gender`,`age`, `role`)
+		(`image_id`, `login_id`, `login_pw`, `nickname`,
+		`email`, `gender`,`age`, `role`)
 		VALUES
-		(#{imageId}, #{loginId}, #{loginPw}, #{nickname}, #{email}, #{gender}, #{age}, #{role})
+		(#{imageId}, #{loginId},
+		#{loginPw}, #{nickname}, #{email}, #{gender}, #{age}, #{role})
 		<selectKey resultType="int" keyProperty="id" order="AFTER">
-        	SELECT LAST_INSERT_ID()
-    	</selectKey>
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
-		
-	<update id="updateUser" parameterType="user"> 
-		UPDATE user SET 
-		image_id = #{imageId}, login_pw = #{loginPw}, nickname = #{nickname}, 
+
+	<update id="updateUser" parameterType="user">
+		UPDATE user SET
+		image_id = #{imageId}, login_pw = #{loginPw}, nickname = #{nickname},
 		email = #{email}, gender = #{gender}, age = #{age}, role = #{role}
-		WHERE id = #{id} 
-	</update> 
-	
-	<select id="selectByLoginId" resultMap="userMap" parameterType="string"> 
-  		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`, `gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at  
-		FROM user WHERE login_id = #{loginId} 
+		WHERE id
+		= #{id}
+	</update>
+
+	<select id="selectByLoginId" resultMap="userMap"
+		parameterType="string">
+		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`,
+		`gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초')
+		as created_at
+		FROM user WHERE login_id = #{loginId}
 	</select>
 
-	<delete id="deleteUser" parameterType="int"> 
-		DELETE FROM user WHERE id = #{id} 
+	<delete id="deleteUser" parameterType="int">
+		DELETE FROM user WHERE id = #{id}
 	</delete>
 
 	<select id="selectById" resultMap="userMap" parameterType="int">
-  		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`, `gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at  
+		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`,
+		`gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초')
+		as created_at
 		FROM user WHERE id = #{id}
 	</select>
-	
-	<select id="selectUserList" resultMap="userMap"> 
-		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`, `gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at 
-		FROM user 
-	</select>
-	
-	<select id="selectFollowingList" resultMap="userMap" parameterType="int">
-  		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`, `gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at  
-  		FROM user WHERE user.id IN (SELECT follow_id
-            						FROM relationship
-            						WHERE user_id = #{id})
-  	</select> 
 
-  	<select id="selectFollowerList" resultMap="userMap" parameterType="int">
-  		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`, `gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at  
-  		FROM user WHERE user.id IN (SELECT user_id
-            						FROM relationship
-            						WHERE follow_id = #{id})
-  	</select> 
+	<select id="selectUserList" resultMap="userMap">
+		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`,
+		`gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초')
+		as created_at
+		FROM user
+	</select>
+
+	<select id="selectFollowingList" resultMap="userMap"
+		parameterType="int">
+		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`,
+		`gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초')
+		as created_at
+		FROM user WHERE user.id IN (SELECT follow_id
+		FROM relationship
+		WHERE user_id = #{id})
+	</select>
+
+	<select id="selectFollowerList" resultMap="userMap"
+		parameterType="int">
+		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`,
+		`gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초')
+		as created_at
+		FROM user WHERE user.id IN (SELECT user_id
+		FROM relationship
+		WHERE follow_id = #{id})
+	</select>
 </mapper>
 

@@ -16,17 +16,17 @@ import io.swagger.annotations.ApiOperation;
 @RestController
 @RequestMapping("/api")
 public class LikeController {
-	
+
 	@Autowired
 	private LikeService likeService;
-	
+
 	@ApiOperation(value = "좋아요 생성", notes = "userId와 postId 값을 받아 like 생성")
 	@PostMapping("/like")
 	public ResponseEntity<?> create(Like like) {
 		likeService.insert(like);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
-	
+
 	@ApiOperation(value = "좋아요 삭제", notes = "userId와 postId 값을 받아 like 삭제")
 	@DeleteMapping("/like")
 	public ResponseEntity<?> delete(Like like) {
@@ -34,9 +34,3 @@ public class LikeController {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
-
-
-
-
-
-
