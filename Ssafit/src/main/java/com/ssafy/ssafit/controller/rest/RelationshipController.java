@@ -32,5 +32,4 @@ public class RelationshipController {
 		relationService.unfollow(relationship);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
-
 }

@@ -39,7 +39,7 @@ public class CommentServiceImpl implements CommentService {
 		originComment.setContent(comment.getContent());
 		commentDao.updateComment(originComment);
 	}
-	
+
 	@Override
 	public List<CommentResponse> getListByPostId(int postId) {
 		List<CommentResponse> commentResponses = new ArrayList<CommentResponse>();
@@ -56,7 +56,7 @@ public class CommentServiceImpl implements CommentService {
 	@Transactional
 	@Override
 	public void delete(int id) {
-		if(replyDao.selectCountByCommentId(id) != 0)
+		if (replyDao.selectCountByCommentId(id) != 0)
 			commentDao.updateDeletedComment(id);
 		else
 			commentDao.deleteComment(id);

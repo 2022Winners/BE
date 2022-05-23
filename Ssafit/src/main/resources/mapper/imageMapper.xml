@@ -9,16 +9,17 @@
 		<result column="name" property="name" />
 		<result column="uri" property="uri" />
 	</resultMap>
-	
+
 	<insert id="insertImage" parameterType="image">
 		INSERT INTO image
 		VALUES(0, #{userId}, #{name}, #{uri})
 		<selectKey resultType="int" keyProperty="id" order="AFTER">
-        	SELECT LAST_INSERT_ID()
-    	</selectKey>
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 
-	<select id="selectImage" resultMap="imageMap" parameterType="int">
+	<select id="selectImage" resultMap="imageMap"
+		parameterType="int">
 		SELECT * FROM image WHERE user_id = #{userId}
 	</select>
 </mapper>

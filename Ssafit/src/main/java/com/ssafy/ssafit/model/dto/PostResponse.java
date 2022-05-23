@@ -1,9 +1,13 @@
 package com.ssafy.ssafit.model.dto;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
 public class PostResponse {
 	private int id;
@@ -15,7 +19,6 @@ public class PostResponse {
 	private int likeCnt;
 	private String createdAt;
 	private boolean islike;
-	
 	
 	public static PostResponse build(Post post, boolean islike) {
 		PostResponse pr = new PostResponse();
@@ -30,6 +33,4 @@ public class PostResponse {
 		pr.setIslike(islike);
 		return pr;
 	}
-
-	
 }

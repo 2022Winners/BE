@@ -31,5 +31,4 @@ public interface UserService {
 
 	// 나를 팔로우하는 회원 목록 조회
 	List<User> getFollowerList(int id);
-
 }

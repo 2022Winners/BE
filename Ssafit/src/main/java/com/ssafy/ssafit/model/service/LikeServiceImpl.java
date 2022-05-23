@@ -10,20 +10,19 @@ public class LikeServiceImpl implements LikeService {
 
 	@Autowired
 	private LikeDao likeDao;
-	
+
 	@Autowired
 	private PostService postService;
-	
+
 	@Override
 	public void insert(Like like) {
 		likeDao.registLike(like);
-		postService.plusLikeCnt(like.getPostId());		
+		postService.plusLikeCnt(like.getPostId());
 	}
 
 	@Override
 	public void delete(Like like) {
 		likeDao.deleteLike(like);
-		postService.minusLikeCnt(like.getPostId());	
+		postService.minusLikeCnt(like.getPostId());
 	}
-
 }

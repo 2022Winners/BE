@@ -2,104 +2,133 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="com.ssafy.ssafit.model.dao.PostDao">
-    <resultMap type="post" id="postMap">
-  		<id column="id" property="id"/>
-  		<result column="title" property="title"/>
-  		<result column="channel" property="channel"/>
-  		<result column="part" property="part"/>
-  		<result column="video_id" property="videoId"/>
-  		<result column="view_cnt" property="viewCnt"/>
-  		<result column="like_cnt" property="likeCnt"/>
-  		<result column="created_at" property="createdAt"/>
-  	</resultMap>
-  	
-  	<insert id="insertPost" parameterType="post">
-  		INSERT INTO post VALUES
-  		(0, #{title}, #{channel}, #{part}, #{videoId}, 0, 0,
-  		now())
-  	</insert>
-  	<update id="updatePost" parameterType="post">
-  		UPDATE post 
-  		SET 
-  		title = #{title},
-  		channel = #{channel},
-  		part = #{part},
-  		video_id = #{videoId},
-  		view_cnt = #{viewCnt},
-    	like_cnt = #{likeCnt}
-  		WHERE id = #{id}
-  	</update>
-  	<delete id="deletePost" parameterType="int">
-  		DELETE FROM post WHERE id = #{id}
-  	</delete>
-  	
-  	<select id="selectOne" resultMap="postMap" parameterType="int">
-  		SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
-  		FROM post
-  		WHERE id = #{id}
-  	</select>
-  	
-  	
-  	<select id="selectList" resultMap="postMap" parameterType="java.util.HashMap">
-  		SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
-  		FROM post
-  		<if test="mode == 1">
-  			WHERE title LIKE CONCAT('%', #{keyword}, '%')
-  		</if>
-  		<if test="mode == 2">
-  			WHERE part LIKE '%${keyword}%'
-  		</if>
-  		<if test="mode == 3">
-  			WHERE title LIKE CONCAT('%', #{keyword}, '%')
-  			OR part LIKE '%${keyword}%'
-  		</if>
-  		ORDER BY created_at	DESC
-  	</select> 
-  	<select id="selectListByPart" resultMap="postMap" parameterType="string">
-  	    SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
-  		FROM post
-  		WHERE part = #{part}
-  		ORDER BY created_at	DESC
-  	</select>
-  		<select id="selectTopList" resultMap="postMap" >
-  	    SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
-  		FROM post
-  		ORDER BY view_cnt DESC limit 8	
-  	</select>
-  	
-  	<select id="selectTopListByGender" resultMap="postMap" parameterType="int">
-  	    SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
-  		FROM post
-  		where id in (SELECT DISTINCT post_id
-                     from `like`
-                     where user_id in (select id
-                                      from user
-                                       where gender = (SELECT gender
-                                                       FROM user
-													   WHERE id = #{userId})))
-        ORDER BY like_cnt DESC LIMIT 4;
-  	</select>
-  	<select id="selectTopListByAge" resultMap="postMap" parameterType="int">
-  	    SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
-  		FROM post
-  		where id in (SELECT DISTINCT post_id
-                     from `like`
-                     where user_id in (select id
-                                       from user
-                                       where age = (SELECT age
-                                                    FROM user
-													WHERE id = #{userId})))
-        ORDER BY like_cnt DESC LIMIT 4;
-  	</select>
-  	<select id="selectUserLikeList" resultMap="postMap" parameterType="int">
-  	    SELECT id, title, channel, part, video_id, view_cnt, like_cnt , date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
-        FROM post
-        where id in (select post_id
-  		             from `like`
-  		             where user_id = #{userId})
-  	</select>
-  	
-  	
-  	
-  </mapper>
+<mapper namespace="com.ssafy.ssafit.model.dao.PostDao">
+	<resultMap type="post" id="postMap">
+		<id column="id" property="id" />
+		<result column="title" property="title" />
+		<result column="channel" property="channel" />
+		<result column="part" property="part" />
+		<result column="video_id" property="videoId" />
+		<result column="view_cnt" property="viewCnt" />
+		<result column="like_cnt" property="likeCnt" />
+		<result column="created_at" property="createdAt" />
+	</resultMap>
+
+	<insert id="insertPost" parameterType="post">
+		INSERT INTO post VALUES
+		(0, #{title}, #{channel}, #{part}, #{videoId}, 0, 0,
+		now())
+	</insert>
+
+	<update id="updatePost" parameterType="post">
+		UPDATE post
+		SET
+		title =
+		#{title},
+		channel = #{channel},
+		part = #{part},
+		video_id = #{videoId},
+		view_cnt = #{viewCnt},
+		like_cnt = #{likeCnt}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="deletePost" parameterType="int">
+		DELETE FROM post WHERE id
+		= #{id}
+	</delete>
+
+	<select id="selectOne" resultMap="postMap" parameterType="int">
+		SELECT
+		id, title, channel, part, video_id, view_cnt, like_cnt ,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		FROM post
+		WHERE id = #{id}
+	</select>
+
+	<select id="selectList" resultMap="postMap"
+		parameterType="java.util.HashMap">
+		SELECT id, title, channel, part, video_id, view_cnt, like_cnt ,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		FROM post
+		<if test="mode == 1">
+			WHERE title LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="mode == 2">
+			WHERE part LIKE '%${keyword}%'
+		</if>
+		<if test="mode == 3">
+			WHERE title LIKE CONCAT('%', #{keyword}, '%')
+			OR part LIKE
+			'%${keyword}%'
+		</if>
+		ORDER BY created_at DESC
+	</select>
+
+	<select id="selectListByPart" resultMap="postMap"
+		parameterType="string">
+		SELECT id, title, channel, part, video_id, view_cnt,
+		like_cnt ,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		FROM post
+		WHERE part = #{part}
+		ORDER BY created_at DESC
+	</select>
+
+	<select id="selectTopList" resultMap="postMap">
+		SELECT id, title, channel,
+		part, video_id, view_cnt, like_cnt ,
+		date_format(created_at, '%Y년%m월%d일
+		%H시%i분%s초') as created_at
+		FROM post
+		ORDER BY view_cnt DESC limit 8
+	</select>
+
+	<select id="selectTopListByGender" resultMap="postMap"
+		parameterType="int">
+		SELECT id, title, channel, part, video_id, view_cnt,
+		like_cnt ,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		FROM post
+		where id in (SELECT DISTINCT post_id
+		from `like`
+		where user_id
+		in (select id
+		from user
+		where gender = (SELECT gender
+		FROM user
+		WHERE id =
+		#{userId})))
+		ORDER BY like_cnt DESC LIMIT 4;
+	</select>
+
+	<select id="selectTopListByAge" resultMap="postMap"
+		parameterType="int">
+		SELECT id, title, channel, part, video_id, view_cnt,
+		like_cnt ,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		FROM post
+		where id in (SELECT DISTINCT post_id
+		from `like`
+		where user_id
+		in (select id
+		from user
+		where age = (SELECT age
+		FROM user
+		WHERE id =
+		#{userId})))
+		ORDER BY like_cnt DESC LIMIT 4;
+	</select>
+
+	<select id="selectUserLikeList" resultMap="postMap"
+		parameterType="int">
+		SELECT id, title, channel, part, video_id, view_cnt,
+		like_cnt ,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		FROM post
+		where id in (select post_id
+		from `like`
+		where user_id =
+		#{userId})
+	</select>
+</mapper>

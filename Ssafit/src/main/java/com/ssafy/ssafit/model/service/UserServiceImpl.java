@@ -91,5 +91,4 @@ public class UserServiceImpl implements UserService {
 	public List<User> getFollowerList(int id) {
 		return userDao.selectFollowerList(id);
 	}
-
 }

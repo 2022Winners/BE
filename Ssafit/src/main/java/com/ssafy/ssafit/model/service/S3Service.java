@@ -10,5 +10,4 @@ public interface S3Service {
 
 	// 업로드한 파일 url 조회
 	String getFileUrl(String fileName);
-
 }
