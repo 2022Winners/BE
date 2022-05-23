@@ -17,6 +17,7 @@
 	<delete id="deleteRelation" parameterType="relationship">
   		DELETE FROM relationship 
   		WHERE user_id = #{userId} 
-  		and follow_id = #{followId}
+  		AND follow_id = #{followId}
   	</delete>
+  	
 </mapper>

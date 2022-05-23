@@ -15,20 +15,19 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class FileUploadServiceImpl implements FileUploadService{
+public class FileUploadServiceImpl implements FileUploadService {
 
-	@Autowired
-	private S3Service s3Service;
-	
+	private final S3Service s3Service;
+
 	@Override
 	public Image uploadImage(MultipartFile file) {
 		String fileName = createFileName(file.getOriginalFilename());
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentLength(file.getSize());
 		objectMetadata.setContentType(file.getContentType());
-		try(InputStream inputStream = file.getInputStream()){
+		try (InputStream inputStream = file.getInputStream()) {
 			s3Service.uploadFile(inputStream, objectMetadata, fileName);
-		}catch(IOException e) {
+		} catch (IOException e) {
 			throw new IllegalArgumentException(String.format("파일 변환 중 에러 (%s)", file.getOriginalFilename()));
 		}
 		Image image = new Image();
@@ -36,19 +35,19 @@ public class FileUploadServiceImpl implements FileUploadService{
 		image.setUri(s3Service.getFileUrl(fileName));
 		return image;
 	}
-	
+
 	@Override
 	public String createFileName(String originalFileName) {
 		return UUID.randomUUID().toString().concat(getFileExtension(originalFileName));
 	}
-	
+
 	@Override
 	public String getFileExtension(String fileName) {
 		try {
 			return fileName.substring(fileName.lastIndexOf("."));
-		}catch(StringIndexOutOfBoundsException e) {
+		} catch (StringIndexOutOfBoundsException e) {
 			throw new IllegalArgumentException(String.format("잘못된 형식 파일 %s", fileName));
 		}
-		
+
 	}
 }

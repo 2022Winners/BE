@@ -20,11 +20,13 @@ public interface UserDao {
 	// 유저 아이디로 조회
 	User selectById(int id);
 
-	// 팔로잉 목록 조회 select
-	List<User> selectListbyIdo(int id);
+	// 유저 전체 목록 조회
+	List<User> selectUserList();
 
-	// 팔로워 목록 조회 select
-	List<User> selectListbyTheydo(int id);
+	// 내가 팔로우 한 사람들 목록 조회
+	List<User> selectFollowingList(int id);
 
-//	void updateUser(User user);
+	// 나를 팔로우 한 사람들 목록 조회
+	List<User> selectFollowerList(int id);
+
 }

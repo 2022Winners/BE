@@ -4,6 +4,7 @@ import java.io.InputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -14,10 +15,9 @@ import com.ssafy.ssafit.util.S3Component;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class S3ServiceImpl implements S3Service {
 
-	@Autowired
 	private final AmazonS3 amazonS3;
 	private final S3Component component;
 
