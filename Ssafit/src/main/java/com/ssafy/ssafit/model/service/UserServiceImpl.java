@@ -44,16 +44,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void login(String loginId, String loginPw) throws Exception {
+	public User login(String loginId, String loginPw) throws Exception {
 		User user = userDao.selectByLoginId(loginId);
 		if (user == null) // loginId로 못 찾은 경우
 			throw new IdIncorrectException();
 		else if (!user.getLoginPw().equals(new SHA256().getHash(loginPw))) // 비밀번호가 다른 경우
 			throw new PwIncorrectException();
-		else {
-			System.out.println("ok");
-			// 로그인 성공! jwt 발급해주자~
-		}
+		else // 로그인 성공! jwt 발급해주자~
+			return user;
 	}
 
 	@Transactional

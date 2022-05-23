@@ -42,9 +42,8 @@ public class UserController {
 
 	@ApiOperation(value = "로그인", notes = "loginId, loginPw 값을 입력하여 로그인")
 	@PostMapping("/user/login")
-	public ResponseEntity<?> login(String loginId, String loginPw) throws Exception {
-		userService.login(loginId, loginPw);
-		return new ResponseEntity<>(HttpStatus.OK); // 성공했으면 jwt발급한거 리턴해주자~
+	public ResponseEntity<User> login(String loginId, String loginPw) throws Exception {
+		return new ResponseEntity<User>(userService.login(loginId, loginPw), HttpStatus.OK); // 성공했으면 jwt발급한거 리턴해주자~
 	}
 
 	@ApiOperation(value = "회원 정보 수정", notes = "id, imageId, loginPw, nickname, email, gender, age, role)값을 입력하여 회원 정보 수정")

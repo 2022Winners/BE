@@ -12,7 +12,7 @@ public interface UserService {
 	void join(User user, MultipartFile file) throws Exception;
 
 	// 로그인
-	void login(String id, String pw) throws Exception;
+	User login(String id, String pw) throws Exception;
 
 	// 회원 정보 수정
 	void update(User user) throws Exception;
