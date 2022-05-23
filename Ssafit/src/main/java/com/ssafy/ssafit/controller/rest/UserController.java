@@ -68,19 +68,19 @@ public class UserController {
 
 	@ApiOperation(value = "회원 전체 조회", notes = "회원 전체 조회")
 	@GetMapping("/users")
-	public ResponseEntity<List<User>> myPage() {
+	public ResponseEntity<List<User>> getUserList() {
 		return new ResponseEntity<List<User>>(userService.getUserList(), HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "팔로잉 목록 조회", notes = "id 값을 입력하여 내가 팔로우 하는 사람 목록 조회")
 	@GetMapping("/users/following/{id}")
-	public ResponseEntity<List<User>> getUserListIdo(@PathVariable int id) {
+	public ResponseEntity<List<User>> getFollowingList(@PathVariable int id) {
 		return new ResponseEntity<List<User>>(userService.getFollowingList(id), HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "팔로워 목록 조회", notes = "id 값을 입력하여 나를 팔로우 하는 사람 목록 조회")
 	@GetMapping("/users/follower/{id}")
-	public ResponseEntity<List<User>> getUserListTheydo(@PathVariable int id) {
+	public ResponseEntity<List<User>> getFollowerList(@PathVariable int id) {
 		return new ResponseEntity<List<User>>(userService.getFollowerList(id), HttpStatus.OK);
 	}
 }
