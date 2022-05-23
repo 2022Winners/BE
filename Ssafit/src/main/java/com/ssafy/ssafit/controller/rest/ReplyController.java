@@ -18,42 +18,38 @@ import com.ssafy.ssafit.model.dto.MyComment;
 import com.ssafy.ssafit.model.dto.Reply;
 import com.ssafy.ssafit.model.service.ReplyService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/api")
 public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 
-	// C
+	@ApiOperation(value = "대댓글 생성", notes = "postId, commentId, userId, content 값을 입력하여 댓글 생성")
 	@PostMapping("/reply")
 	public ResponseEntity<?> create(@RequestBody Reply reply) {
 		replyService.create(reply);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
-	// R - List ( UserId )
+	@ApiOperation(value = "내가 쓴 댓글 목록 조회", notes = "userId 값을 입력하여 내가 쓴 댓글/대댓글 목록 조회")
 	@GetMapping("/replys/user/{userId}")
 	public ResponseEntity<List<MyComment>> getListByUserId(@PathVariable int userId) {
 		return new ResponseEntity<List<MyComment>>(replyService.getListByUserId(userId), HttpStatus.OK);
 	}
-	
-	// U
+
+	@ApiOperation(value = "대댓글 수정", notes = "replyId 값과, content 값을 입력하여 대댓글 수정")
 	@PutMapping("/reply/{id}")
 	public ResponseEntity<?> update(@PathVariable int id, Reply reply) {
 		replyService.update(reply);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	// D
+	@ApiOperation(value = "대댓글 삭제", notes = "replyId 값을 입력하여 대댓글 삭제")
 	@DeleteMapping("/reply/{id}")
 	public ResponseEntity<?> delete(@PathVariable int id) {
 		replyService.delete(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
-
-
-
-
-
-

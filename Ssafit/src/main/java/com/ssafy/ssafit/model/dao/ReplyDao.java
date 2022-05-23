@@ -12,8 +12,11 @@ public interface ReplyDao {
 	// 대댓글 조회 selectOne
 	Reply selectOne(int id);
 
-	// 게시물에 해당하는 대댓글 목록 selectListByCommentId
+	// 댓글에 해당하는 대댓글 목록 selectListByCommentId
 	List<Reply> selectListByCommentId(int commentId);
+
+	// 댓글에 해당하는 대댓글 개수 selectCountByCommentId
+	int selectCountByCommentId(int commentId);
 
 	// 대댓글 수정 update
 	void updateReply(Reply reply);
@@ -23,7 +26,7 @@ public interface ReplyDao {
 
 	// 게시물 삭제에 따른 대댓글 삭제 delete
 	void deleteReplyByPostId(int postId);
-	
+
 	// 해당 유저가 작성한 댓글 + 대댓글 목록 selectListByUserId
 	List<MyComment> selectListByUserId(int userId);
 }
