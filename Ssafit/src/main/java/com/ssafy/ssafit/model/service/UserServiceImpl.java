@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private ImageDao imageDao;
-	
+
 	@Autowired
 	private FileUploadService fileUploadService;
 
@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
 	public void getout(int id) { // 회원 탈퇴
 		userDao.deleteUser(id);
 	}
-	
+
 	@Override
 	public Map<String, Object> myPage(int id) { // 회원 상세 조회
 		User user = userDao.selectById(id);
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 		ret.put("image", image);
 		return ret;
 	}
-	
+
 	@Override
 	public List<User> getUserListIdo(int id) { // 내가 팔로우하는 회원 목록 조회
 		return userDao.selectListbyIdo(id);

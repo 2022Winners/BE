@@ -3,17 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="com.ssafy.ssafit.model.dao.LikeDao">
-    <resultMap type="post" id="postMap">
-  		<id column="id" property="id"/>
-  		<result column="title" property="title"/>
-  		<result column="channel" property="channel"/>
-  		<result column="part" property="part"/>
-  		<result column="video_id" property="videoId"/>
-  		<result column="view_cnt" property="viewCnt"/>
-  		<result column="like_cnt" property="likeCnt"/>
-  		<result column="created_at" property="createdAt"/>
-  	</resultMap>
- 
  
     <resultMap type="like" id="likeMap">
       <result column="id" property="id"/>
@@ -31,13 +20,7 @@
     WHERE user_ID = #{userId}
     AND post_id = #{postId}
     </delete>
-    
-    <select id="selectLikePost" parameterType="int" resultMap="likeMap" >
-    select *
-    from `like`
-    where user_id = #{userId}    
-    </select> 
-    
+       
      <select id="userLikeVideo" parameterType="java.util.HashMap" resultType="int" >
     select count(*)
     from `like`
