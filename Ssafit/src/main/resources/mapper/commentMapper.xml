@@ -25,13 +25,19 @@
 		WHERE id = #{id}
 	</update>
 
-	<update id="deleteComment" parameterType="int">
+	<update id="updateDeletedComment" parameterType="int">
 		UPDATE comment
 		SET
 		content = '삭제된 댓글입니다.',
 		is_deleted = true
 		WHERE id = #{id}
 	</update>
+
+	<delete id="deleteComment" parameterType="int">
+		DELETE FROM
+		comment
+		WHERE id = #{id}
+	</delete>
 
 	<delete id="deleteCommentByPostId" parameterType="int">
 		DELETE FROM

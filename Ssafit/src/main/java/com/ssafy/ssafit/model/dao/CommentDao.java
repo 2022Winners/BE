@@ -16,11 +16,14 @@ public interface CommentDao {
 
 	// 유저가 작성한 모든 댓글 목록 selectListByUserId
 	List<Comment> selectListByUserId(int userId);
-		
+
 	// 댓글 수정 update
 	void updateComment(Comment comment);
 
-	// 댓글 삭제 delete
+	// 댓글 삭제 delete(대댓글 있을 때)
+	void updateDeletedComment(int id);
+
+	// 댓글 삭제 delete(대댓글 없을 때)
 	void deleteComment(int id);
 
 	// 게시물 삭제에 따른 댓글 삭제 delete

@@ -12,10 +12,10 @@ import com.ssafy.ssafit.model.dto.Reply;
 
 @Service
 public class ReplyServiceImpl implements ReplyService {
-	
+
 	@Autowired
 	private ReplyDao replyDao;
-	
+
 	@Transactional
 	@Override
 	public void create(Reply reply) {

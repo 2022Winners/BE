@@ -17,7 +17,7 @@ public interface ReplyService {
 
 	// 대댓글 삭제
 	void delete(int id);
-	
+
 	// 해당 유저가 작성한 모든 댓글 + 대댓글 목록
 	List<MyComment> getListByUserId(int userId);
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="com.ssafy.ssafit.model.dao.ReplyDao">
+<mapper namespace="com.ssafy.ssafit.model.dao.ReplyDao">
 	<resultMap type="reply" id="replyMap">
 		<id column="id" property="id" />
 		<result column="user_id" property="userId" />
@@ -11,7 +11,7 @@
 		<result column="content" property="content" />
 		<result column="created_at" property="createdAt" />
 	</resultMap>
-	
+
 	<resultMap type="myComment" id="myCommentMap">
 		<result column="post_id" property="postId" />
 		<result column="content" property="content" />
@@ -23,31 +23,41 @@
 		VALUES
 		(0, #{userId}, #{postId}, #{commentId}, #{content}, now())
 	</insert>
-	
+
 	<update id="updateReply" parameterType="reply">
 		UPDATE reply
 		SET
-		content = #{content}
+		content =
+		#{content}
 		WHERE id = #{id}
 	</update>
-	
+
 	<delete id="deleteReply" parameterType="int">
 		DELETE FROM reply
-		WHERE id = #{id}
-	</delete>
-	
-	<delete id="deleteReplyByPostId" parameterType="int">
-		DELETE FROM
-		reply WHERE post_id = #{postId}
+		WHERE id
+		= #{id}
 	</delete>
 
-	<select id="selectOne" resultMap="replyMap"
-		parameterType="int">
+	<delete id="deleteReplyByPostId" parameterType="int">
+		DELETE FROM
+		reply
+		WHERE post_id = #{postId}
+	</delete>
+
+	<select id="selectOne" resultMap="replyMap" parameterType="int">
 		SELECT id, user_id, post_id, comment_id, content,
 		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
 		FROM
 		reply
 		WHERE id = #{id}
+	</select>
+
+	<select id="selectCountByCommentId" resultType="int"
+		parameterType="int">
+		SELECT count(*)
+		FROM
+		reply
+		WHERE comment_id = #{commentId}
 	</select>
 
 	<select id="selectListByCommentId" resultMap="replyMap"
@@ -58,19 +68,22 @@
 		reply
 		WHERE comment_id = #{commentId}
 	</select>
-	
-		
+
+
 	<select id="selectListByUserId" resultMap="myCommentMap"
 		parameterType="int">
-		SELECT post_id, content, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		SELECT post_id, content, date_format(created_at,
+		'%Y년%m월%d일 %H시%i분%s초') as created_at
 		FROM
 		comment
-		WHERE user_id = #{userId} AND is_deleted = false
+		WHERE user_id =
+		#{userId} AND is_deleted = false
 		UNION ALL
-		SELECT post_id, content, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		SELECT post_id, content,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
 		FROM
 		reply
 		WHERE user_id = #{userId}
 		ORDER BY created_at DESC, post_id ASC
 	</select>
- </mapper>
+</mapper>
