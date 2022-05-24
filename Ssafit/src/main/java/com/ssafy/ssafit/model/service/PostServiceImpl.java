@@ -34,6 +34,7 @@ public class PostServiceImpl implements PostService {
 		origin.setChannel(postResponse.getChannel());
 		origin.setPart(postResponse.getPart());
 		origin.setVideoId(postResponse.getVideoId());
+		origin.setChannelImg(postResponse.getChannelImg());
 		postDao.updatePost(origin);
 	}
 

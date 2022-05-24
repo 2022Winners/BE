@@ -18,4 +18,5 @@ public class Post {
 	private int viewCnt;
 	private int likeCnt;
 	private String createdAt;
+	private String channelImg;
 }

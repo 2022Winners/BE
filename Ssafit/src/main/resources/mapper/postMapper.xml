@@ -12,12 +12,14 @@
 		<result column="view_cnt" property="viewCnt" />
 		<result column="like_cnt" property="likeCnt" />
 		<result column="created_at" property="createdAt" />
+		<result column="channel_img" property="channelImg" />
+		
 	</resultMap>
 
 	<insert id="insertPost" parameterType="post">
 		INSERT INTO post VALUES
 		(0, #{title}, #{channel}, #{part}, #{videoId}, 0, 0,
-		now())
+		now(), #{channelImg})
 	</insert>
 
 	<update id="updatePost" parameterType="post">
@@ -29,7 +31,8 @@
 		part = #{part},
 		video_id = #{videoId},
 		view_cnt = #{viewCnt},
-		like_cnt = #{likeCnt}
+		like_cnt = #{likeCnt},
+		channel_img = #{channelImg}
 		WHERE id = #{id}
 	</update>
 
@@ -41,7 +44,7 @@
 	<select id="selectOne" resultMap="postMap" parameterType="int">
 		SELECT
 		id, title, channel, part, video_id, view_cnt, like_cnt ,
-		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at, channel_img
 		FROM post
 		WHERE id = #{id}
 	</select>
@@ -49,7 +52,7 @@
 	<select id="selectList" resultMap="postMap"
 		parameterType="java.util.HashMap">
 		SELECT id, title, channel, part, video_id, view_cnt, like_cnt ,
-		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at, channel_img
 		FROM post
 		<if test="mode == 1">
 			WHERE title LIKE CONCAT('%', #{keyword}, '%')
@@ -69,7 +72,7 @@
 		parameterType="string">
 		SELECT id, title, channel, part, video_id, view_cnt,
 		like_cnt ,
-		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at, channel_img
 		FROM post
 		WHERE part = #{part}
 		ORDER BY created_at DESC
@@ -79,7 +82,7 @@
 		SELECT id, title, channel,
 		part, video_id, view_cnt, like_cnt ,
 		date_format(created_at, '%Y년%m월%d일
-		%H시%i분%s초') as created_at
+		%H시%i분%s초') as created_at, channel_img
 		FROM post
 		ORDER BY view_cnt DESC limit 8
 	</select>
@@ -88,7 +91,7 @@
 		parameterType="int">
 		SELECT id, title, channel, part, video_id, view_cnt,
 		like_cnt ,
-		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at, channel_img
 		FROM post
 		where id in (SELECT DISTINCT post_id
 		from `like`
@@ -106,7 +109,7 @@
 		parameterType="int">
 		SELECT id, title, channel, part, video_id, view_cnt,
 		like_cnt ,
-		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at, channel_img
 		FROM post
 		where id in (SELECT DISTINCT post_id
 		from `like`
@@ -124,7 +127,7 @@
 		parameterType="int">
 		SELECT id, title, channel, part, video_id, view_cnt,
 		like_cnt ,
-		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at, channel_img
 		FROM post
 		where id in (select post_id
 		from `like`
