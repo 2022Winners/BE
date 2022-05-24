@@ -18,7 +18,7 @@ public class PostResponse {
 	private int viewCnt;
 	private int likeCnt;
 	private String createdAt;
-	private String channelImg;
+	private String channelImg;   
 	private boolean islike;
 	
 	public static PostResponse build(Post post, boolean islike) {

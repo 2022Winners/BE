@@ -121,7 +121,7 @@
 		WHERE id =
 		#{userId})))
 		ORDER BY like_cnt DESC LIMIT 4;
-	</select>
+	</select>  
 
 	<select id="selectUserLikeList" resultMap="postMap"
 		parameterType="int">

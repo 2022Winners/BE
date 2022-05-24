@@ -1,4 +1,4 @@
-package com.ssafy.ssafit.model.dto;
+package com.ssafy.ssafit.model.dto;  
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -149,7 +149,7 @@ public class PostServiceImpl implements PostService {
 			PostResponse rp = PostResponse.build(ageTop.get(i), likeDao.userLikeVideo(map) == 1 ? true : false);
 			responseList.add(rp);
 		}
-		return responseList;
+		return responseList;  
 	}
 
 	@Override
