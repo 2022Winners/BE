@@ -18,6 +18,7 @@ public class PostResponse {
 	private int viewCnt;
 	private int likeCnt;
 	private String createdAt;
+	private String channelImg;   
 	private boolean islike;
 	
 	public static PostResponse build(Post post, boolean islike) {
@@ -30,6 +31,7 @@ public class PostResponse {
 		pr.setViewCnt(post.getViewCnt());
 		pr.setLikeCnt(post.getLikeCnt());
 		pr.setCreatedAt(post.getCreatedAt());
+		pr.setChannelImg(post.getChannelImg());
 		pr.setIslike(islike);
 		return pr;
 	}

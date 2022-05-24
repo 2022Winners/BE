@@ -34,6 +34,7 @@ public class PostServiceImpl implements PostService {
 		origin.setChannel(postResponse.getChannel());
 		origin.setPart(postResponse.getPart());
 		origin.setVideoId(postResponse.getVideoId());
+		origin.setChannelImg(postResponse.getChannelImg());
 		postDao.updatePost(origin);
 	}
 
@@ -148,7 +149,7 @@ public class PostServiceImpl implements PostService {
 			PostResponse rp = PostResponse.build(ageTop.get(i), likeDao.userLikeVideo(map) == 1 ? true : false);
 			responseList.add(rp);
 		}
-		return responseList;
+		return responseList;  
 	}
 
 	@Override
