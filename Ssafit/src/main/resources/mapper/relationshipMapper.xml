@@ -20,4 +20,10 @@
 		WHERE user_id = #{userId}
 		AND follow_id = #{followId}
 	</delete>
+	
+	<select id="checkRelation" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(*)
+		FROM relationship
+		WHERE user_id = #{userId} AND follow_id = #{followId}
+	</select>
 </mapper>
