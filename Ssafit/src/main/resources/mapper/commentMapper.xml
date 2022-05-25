@@ -6,6 +6,7 @@
 	<resultMap type="comment" id="commentMap">
 		<id column="id" property="id" />
 		<result column="user_id" property="userId" />
+		<result column="writer" property="writer" />
 		<result column="post_id" property="postId" />
 		<result column="content" property="content" />
 		<result column="is_deleted" property="isDeleted" />
@@ -15,7 +16,7 @@
 	<insert id="insertComment" parameterType="comment">
 		INSERT INTO comment
 		VALUES
-		(0, #{userId}, #{postId}, #{content}, false, now())
+		(0, #{userId}, #{writer}, #{postId}, #{content}, false, now())
 	</insert>
 
 	<update id="updateComment" parameterType="comment">
@@ -28,9 +29,11 @@
 	<update id="updateDeletedComment" parameterType="int">
 		UPDATE comment
 		SET
+		writer = '알수없음',
 		content = '삭제된 댓글입니다.',
 		is_deleted = true
-		WHERE id = #{id}
+		WHERE id =
+		#{id}
 	</update>
 
 	<delete id="deleteComment" parameterType="int">
@@ -46,8 +49,10 @@
 
 	<select id="selectOne" resultMap="commentMap"
 		parameterType="int">
-		SELECT id, user_id, post_id, content, is_deleted,
-		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		SELECT id, user_id, writer, post_id, content,
+		is_deleted,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as
+		created_at
 		FROM
 		comment
 		WHERE id = #{id}
@@ -55,8 +60,10 @@
 
 	<select id="selectListByPostId" resultMap="commentMap"
 		parameterType="int">
-		SELECT id, user_id, post_id, content, is_deleted,
-		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
+		SELECT id, user_id, writer, post_id, content,
+		is_deleted,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as
+		created_at
 		FROM
 		comment
 		WHERE post_id = #{postId}

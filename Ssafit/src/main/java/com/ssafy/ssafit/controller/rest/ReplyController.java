@@ -26,7 +26,7 @@ public class ReplyController {
 	@Autowired
 	private ReplyService replyService;
 
-	@ApiOperation(value = "대댓글 생성", notes = "postId, commentId, userId, content 값을 입력하여 댓글 생성")
+	@ApiOperation(value = "대댓글 생성", notes = "postId, commentId, userId, writer, content 값을 입력하여 댓글 생성")
 	@PostMapping("/reply")
 	public ResponseEntity<?> create(@RequestBody Reply reply) {
 		replyService.create(reply);

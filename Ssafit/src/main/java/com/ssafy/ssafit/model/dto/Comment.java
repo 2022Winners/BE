@@ -12,6 +12,7 @@ import lombok.Setter;
 public class Comment {
 	private int id;
 	private int userId;
+	private String writer;
 	private int postId;
 	private String content;
 	private boolean isDeleted;

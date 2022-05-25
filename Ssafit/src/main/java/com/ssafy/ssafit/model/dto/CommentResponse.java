@@ -14,6 +14,7 @@ import lombok.Setter;
 public class CommentResponse {
 	private int id;
 	private int userId;
+	private String writer;
 	private int postId;
 	private String content;
 	private boolean isDeleted;
@@ -24,6 +25,7 @@ public class CommentResponse {
 		CommentResponse cr = new CommentResponse();
 		cr.setId(comment.getId());
 		cr.setUserId(comment.getUserId());
+		cr.setWriter(comment.getWriter());
 		cr.setPostId(comment.getPostId());
 		cr.setContent(comment.getContent());
 		cr.setDeleted(comment.isDeleted());

@@ -25,7 +25,7 @@ public class CommentController {
 	@Autowired
 	private CommentService commentService;
 
-	@ApiOperation(value = "댓글 생성", notes = "postId, userId, content 값을 입력하여 댓글 생성")
+	@ApiOperation(value = "댓글 생성", notes = "postId, userId, writer, content 값을 입력하여 댓글 생성")
 	@PostMapping("/comment")
 	public ResponseEntity<?> create(@RequestBody Comment comment) {
 		commentService.create(comment);

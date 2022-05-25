@@ -6,6 +6,7 @@
 	<resultMap type="reply" id="replyMap">
 		<id column="id" property="id" />
 		<result column="user_id" property="userId" />
+		<result column="writer" property="writer" />
 		<result column="post_id" property="postId" />
 		<result column="comment_id" property="commentId" />
 		<result column="content" property="content" />
@@ -21,7 +22,7 @@
 	<insert id="insertReply" parameterType="reply">
 		INSERT INTO reply
 		VALUES
-		(0, #{userId}, #{postId}, #{commentId}, #{content}, now())
+		(0, #{userId}, #{writer}, #{postId}, #{commentId}, #{content}, now())
 	</insert>
 
 	<update id="updateReply" parameterType="reply">
@@ -45,7 +46,7 @@
 	</delete>
 
 	<select id="selectOne" resultMap="replyMap" parameterType="int">
-		SELECT id, user_id, post_id, comment_id, content,
+		SELECT id, user_id, writer, post_id, comment_id, content,
 		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
 		FROM
 		reply
@@ -62,7 +63,8 @@
 
 	<select id="selectListByCommentId" resultMap="replyMap"
 		parameterType="int">
-		SELECT id, user_id, post_id, comment_id, content,
+		SELECT id, user_id, writer, post_id, comment_id,
+		content,
 		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at
 		FROM
 		reply

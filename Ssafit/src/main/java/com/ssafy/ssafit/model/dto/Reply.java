@@ -12,6 +12,7 @@ import lombok.Setter;
 public class Reply {
 	private int id;
 	private int userId;
+	private String writer;
 	private int postId;
 	private int commentId;
 	private String content;
