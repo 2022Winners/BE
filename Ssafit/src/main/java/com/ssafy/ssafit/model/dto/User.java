@@ -20,4 +20,5 @@ public class User {
 	private int age;
 	private boolean role;
 	private String createdAt;
+	private String refreshToken;
 }
