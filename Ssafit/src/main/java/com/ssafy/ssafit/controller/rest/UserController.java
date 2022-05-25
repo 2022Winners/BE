@@ -1,5 +1,6 @@
 package com.ssafy.ssafit.controller.rest;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ssafy.ssafit.exception.IdIncorrectException;
+import com.ssafy.ssafit.exception.PwIncorrectException;
 import com.ssafy.ssafit.model.dto.User;
 import com.ssafy.ssafit.model.service.UserService;
 
@@ -42,8 +45,27 @@ public class UserController {
 
 	@ApiOperation(value = "로그인", notes = "loginId, loginPw 값을 입력하여 로그인")
 	@PostMapping("/user/login")
-	public ResponseEntity<User> login(String loginId, String loginPw) throws Exception {
-		return new ResponseEntity<User>(userService.login(loginId, loginPw), HttpStatus.OK); // 성공했으면 jwt발급한거 리턴해주자~
+	public ResponseEntity<Map<String, Object>> login(String loginId, String loginPw) throws Exception {
+		Map<String, Object> ret = new HashMap<String, Object>();
+		try {
+			ret = userService.login(loginId, loginPw);
+		} catch (IdIncorrectException e) {
+			ret.put("errMsg", "해당 아이디의 유저가 없습니다.");
+			return new ResponseEntity<Map<String, Object>>(ret, HttpStatus.UNAUTHORIZED);
+		} catch (PwIncorrectException e) {
+			ret.put("errMsg", "비밀번호가 일치하지 않습니다.");
+			return new ResponseEntity<Map<String, Object>>(ret, HttpStatus.UNAUTHORIZED);
+		}
+		return new ResponseEntity<Map<String, Object>>(ret, HttpStatus.ACCEPTED);
+	}
+
+	@ApiOperation(value = "아이디 존재 유무 조회", notes = "loginId로 아이디 존재 유무 조회")
+	@GetMapping("/user/login/{loginId}")
+	public ResponseEntity<?> isLoginId(@PathVariable String loginId) {
+		if (userService.isLoginId(loginId))
+			return new ResponseEntity<>(HttpStatus.EXPECTATION_FAILED);
+		else
+			return new ResponseEntity<>(HttpStatus.OK);
 	}
 
 	@ApiOperation(value = "회원 정보 수정", notes = "id, imageId, loginPw, nickname, email, gender, age, role)값을 입력하여 회원 정보 수정")

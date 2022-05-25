@@ -44,14 +44,20 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User login(String loginId, String loginPw) throws Exception {
+	public Map<String, Object> login(String loginId, String loginPw) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
 		User user = userDao.selectByLoginId(loginId);
-		if (user == null) // loginId로 못 찾은 경우
+		if (user == null) { // loginId로 못 찾은 경우
 			throw new IdIncorrectException();
-		else if (!user.getLoginPw().equals(new SHA256().getHash(loginPw))) // 비밀번호가 다른 경우
+		} else if (!user.getLoginPw().equals(new SHA256().getHash(loginPw))) // 비밀번호가 다른 경우
 			throw new PwIncorrectException();
-		else // 로그인 성공! jwt 발급해주자~
-			return user;
+		else { // 로그인 성공
+			result.put("user", user);
+			Image image = imageDao.selectImage(user.getId());
+			if (image != null)
+				result.put("image", image);
+			return result;
+		}
 	}
 
 	@Transactional
@@ -90,5 +96,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getFollowerList(int id) {
 		return userDao.selectFollowerList(id);
+	}
+
+	@Override
+	public boolean isLoginId(String loginId) {
+		List<User> list = userDao.selectUserList();
+		int size = list.size();
+		for (int i = 0; i < size; i++) {
+			if (loginId.equals(list.get(i).getLoginId()))
+				return true;
+		}
+		return false;
 	}
 }
