@@ -157,10 +157,21 @@ public class PostServiceImpl implements PostService {
 		List<PostResponse> responseList = new ArrayList<>();
 		List<Post> userLike = postDao.selectUserLikeList(userId);
 		for (int i = 0; i < userLike.size(); i++) {
-			HashMap<String, Integer> map = new HashMap<String, Integer>();
-			map.put("userId", userId);
-			map.put("postId", userLike.get(i).getId());
 			PostResponse rp = PostResponse.build(userLike.get(i), true);
+			responseList.add(rp);
+		}
+		return responseList;
+	}
+
+	@Override
+	public List<PostResponse> getUserLikePartList(String part, int userId) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("part", part);
+		map.put("userId", Integer.toString(userId));
+		List<Post> userLikePart = postDao.selectUserLikePartList(map);
+		List<PostResponse> responseList = new ArrayList<>();
+		for( int i = 0; i < userLikePart.size(); i++) {
+			PostResponse rp = PostResponse.build(userLikePart.get(i), true);
 			responseList.add(rp);
 		}
 		return responseList;

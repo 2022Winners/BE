@@ -30,6 +30,7 @@ public class PostController {
 	@ApiOperation(value = "영상 Post 생성", notes = "title, channel, part, video_id 값을 입력하여 영상 Post 생성")
 	@PostMapping("/post")
 	public ResponseEntity<?> create(Post post) {
+		System.out.println(post.getTitle()+"123");
 		postService.create(post);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
@@ -77,7 +78,7 @@ public class PostController {
 		return new ResponseEntity<List<PostResponse>>(postService.getAgeTopList(userId), HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "영상 Post 수정", notes = "title, channel, part, video_id값 입력하여 수정 가능")
+	@ApiOperation(value = "영상 Post 수정", notes = "title, channel, part, video_id, channelImg값 입력하여 수정 가능")
 	@PutMapping("/post")
 	public ResponseEntity<?> update(PostResponse postResponse) {
 		postService.update(postResponse);
@@ -95,5 +96,11 @@ public class PostController {
 	@GetMapping("/posts/like")
 	public ResponseEntity<List<PostResponse>> getUserLike(@RequestParam int userId) {
 		return new ResponseEntity<List<PostResponse>>(postService.getUserLikeList(userId), HttpStatus.OK);
+	}
+	
+	@ApiOperation(value = "user가 좋아하는 영상 파트별 영상 list 불러오기", notes = "part, userId값을 입력받아 해당 유저가 좋아하는 파트별 영상 리스트 불러오기")
+	@GetMapping("/posts/like/{part}")
+	public ResponseEntity<List<PostResponse>> getUserLike(@PathVariable String part, int userId) {
+		return new ResponseEntity<List<PostResponse>>(postService.getUserLikePartList(part, userId), HttpStatus.OK);
 	}
 }
