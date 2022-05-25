@@ -41,7 +41,7 @@ public class ReplyController {
 
 	@ApiOperation(value = "대댓글 수정", notes = "replyId 값과, content 값을 입력하여 대댓글 수정")
 	@PutMapping("/reply/{id}")
-	public ResponseEntity<?> update(@PathVariable int id, Reply reply) {
+	public ResponseEntity<?> update(@PathVariable int id, @RequestBody Reply reply) {
 		replyService.update(reply);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}

@@ -40,7 +40,7 @@ public class CommentController {
 
 	@ApiOperation(value = "댓글 수정", notes = "commentId 값과, 수정하고자 하는 content 값을 입력하여 댓글 생성")
 	@PutMapping("/comment/{id}")
-	public ResponseEntity<?> update(@PathVariable int id, Comment comment) {
+	public ResponseEntity<?> update(@PathVariable int id, @RequestBody Comment comment) {
 		commentService.update(comment);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
