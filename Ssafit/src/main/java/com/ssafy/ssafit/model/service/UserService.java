@@ -12,7 +12,7 @@ public interface UserService {
 	void join(User user, MultipartFile file) throws Exception;
 
 	// 로그인
-	User login(String id, String pw) throws Exception;
+	Map<String, Object> login(String id, String pw) throws Exception;
 
 	// 회원 정보 수정
 	void update(User user) throws Exception;
@@ -31,4 +31,10 @@ public interface UserService {
 
 	// 나를 팔로우하는 회원 목록 조회
 	List<User> getFollowerList(int id);
+
+	// 토큰 재발급
+	Map<String, Object> refreshToken(int id, String refreshToken) throws Exception;
+
+	// 로그아웃
+	void logout(int id);
 }

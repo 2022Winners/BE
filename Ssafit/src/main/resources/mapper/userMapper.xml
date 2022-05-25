@@ -14,6 +14,7 @@
 		<result column="age" property="age" />
 		<result column="role" property="role" />
 		<result column="created_at" property="createdAt" />
+		<result column="refresh_token" property="refreshToken" />
 	</resultMap>
 
 	<insert id="insertUser" parameterType="java.util.HashMap">
@@ -31,7 +32,7 @@
 	<update id="updateUser" parameterType="user">
 		UPDATE user SET
 		image_id = #{imageId}, login_pw = #{loginPw}, nickname = #{nickname},
-		email = #{email}, gender = #{gender}, age = #{age}, role = #{role}
+		email = #{email}, gender = #{gender}, age = #{age}, role = #{role},	refresh_token = #{refreshToken}
 		WHERE id
 		= #{id}
 	</update>
@@ -40,7 +41,7 @@
 		parameterType="string">
 		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`,
 		`gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초')
-		as created_at
+		as created_at, refresh_token
 		FROM user WHERE login_id = #{loginId}
 	</select>
 
@@ -51,7 +52,7 @@
 	<select id="selectById" resultMap="userMap" parameterType="int">
 		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`,
 		`gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초')
-		as created_at
+		as created_at, refresh_token
 		FROM user WHERE id = #{id}
 	</select>
 
@@ -81,5 +82,12 @@
 		FROM relationship
 		WHERE follow_id = #{id})
 	</select>
+	
+	<update id="logout" parameterType="int">
+		UPDATE user SET
+		refresh_token = null
+		WHERE id = #{id}
+	</update>
+	
 </mapper>
 

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,6 +17,7 @@ import com.ssafy.ssafit.model.dao.ImageDao;
 import com.ssafy.ssafit.model.dao.UserDao;
 import com.ssafy.ssafit.model.dto.Image;
 import com.ssafy.ssafit.model.dto.User;
+import com.ssafy.ssafit.util.JWTUtil;
 import com.ssafy.ssafit.util.SHA256;
 
 @Service
@@ -28,6 +31,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private FileUploadService fileUploadService;
+
+	@Autowired
+	private JWTUtil jwtUtil;
 
 	@Transactional
 	@Override
@@ -43,15 +49,46 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 
+	@Transactional
 	@Override
-	public User login(String loginId, String loginPw) throws Exception {
+	public Map<String, Object> login(String loginId, String loginPw) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
 		User user = userDao.selectByLoginId(loginId);
-		if (user == null) // loginId로 못 찾은 경우
+		if (user == null) { // loginId로 못 찾은 경우
 			throw new IdIncorrectException();
-		else if (!user.getLoginPw().equals(new SHA256().getHash(loginPw))) // 비밀번호가 다른 경우
+		} else if (!user.getLoginPw().equals(new SHA256().getHash(loginPw))) // 비밀번호가 다른 경우
 			throw new PwIncorrectException();
-		else // 로그인 성공! jwt 발급해주자~
-			return user;
+		else { // 로그인 성공
+			user.setRefreshToken(jwtUtil.createRefreshToken());
+			result.put("user", user);
+			Image image = imageDao.selectImage(user.getId());
+			if (image != null)
+				result.put("imageUri", image.getUri());
+			userDao.updateUser(user); // 발급 받은 refreshToken DB에 업데이트
+			result.put("access-token", jwtUtil.createAccessToken());
+			result.put("refresh-token", user.getRefreshToken());
+			return result;
+		}
+	}
+
+	@Transactional
+	@Override
+	public void logout(int id) {
+		userDao.logout(id);
+	}
+
+	@Transactional
+	@Override
+	public Map<String, Object> refreshToken(int id, String refreshToken) throws Exception {
+		HashMap<String, Object> result = new HashMap<>();
+		User user = userDao.selectById(id);
+		if (user.getRefreshToken().equals(refreshToken)) {
+			result.put("user", user);
+			result.put("refresh-token", user.getRefreshToken()); // user에 있어서 굳이 두 번 보낼 필요 있을지
+			result.put("access-token", jwtUtil.createAccessToken());
+		} else // refreshToken이 저장된 것과 다르다면 변조되었을 가능성 있으므로 로그아웃 필요
+			throw new Exception("incorrect");
+		return result;
 	}
 
 	@Transactional
@@ -91,4 +128,5 @@ public class UserServiceImpl implements UserService {
 	public List<User> getFollowerList(int id) {
 		return userDao.selectFollowerList(id);
 	}
+
 }
