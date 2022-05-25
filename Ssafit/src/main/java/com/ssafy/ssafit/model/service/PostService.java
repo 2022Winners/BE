@@ -48,4 +48,7 @@ public interface PostService {
 
 	// 해당 유저가 좋아요 누른 영상 list 검색
 	List<PostResponse> getUserLikeList(int userId);
+	
+	// 해당 유저가 좋아요 누른 파트별 Post 리스트 검색
+	List<PostResponse> getUserLikePartList(String part, int userId);
 }

@@ -35,5 +35,8 @@ public interface PostDao {
 
 	// 해당 유저가 좋아요 누른 영상 리스트
 	List<Post> selectUserLikeList(int userId);
+	
+	// 해당 유저가 좋아요 누른 파트별 영상 리스트
+	List<Post> selectUserLikePartList(HashMap<String, String> params);
 
 }

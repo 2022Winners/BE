@@ -133,5 +133,19 @@
 		from `like`
 		where user_id =
 		#{userId})
+		ORDER BY view_cnt DESC
+	</select>
+	
+	<select id="selectUserLikePartList" resultMap="postMap"
+		parameterType="java.util.HashMap">
+		SELECT id, title, channel, part, video_id, view_cnt,
+		like_cnt ,
+		date_format(created_at, '%Y년%m월%d일 %H시%i분%s초') as created_at, channel_img
+		FROM post
+		where id in (select post_id
+		from `like`
+		where user_id =
+		#{userId}) AND part = #{part}
+		ORDER BY view_cnt DESC
 	</select>
 </mapper>
