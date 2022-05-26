@@ -61,6 +61,25 @@
 		as created_at
 		FROM user
 	</select>
+	
+	<select id="selectSearchUserList" resultMap="userMap" parameterType="java.util.HashMap">
+		SELECT `id`, `image_id`, `login_id`, `login_pw`, `nickname`, `email`,
+		`gender`,`age`, `role`, date_format(created_at, '%Y년%m월%d일 %H시%i분%s초')
+		as created_at
+		FROM user
+		<if test="mode == 1">
+			WHERE login_id LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="mode == 2">
+			WHERE nickname LIKE '%${keyword}%'
+		</if>
+		<if test="mode == 3">
+			WHERE nickname LIKE CONCAT('%', #{keyword}, '%')
+			OR login_id LIKE
+			'%${keyword}%'
+		</if>
+		ORDER BY created_at DESC
+	</select>
 
 	<select id="selectFollowingList" resultMap="userMap"
 		parameterType="int">

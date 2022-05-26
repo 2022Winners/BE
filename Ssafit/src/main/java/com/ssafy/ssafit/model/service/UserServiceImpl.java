@@ -110,4 +110,10 @@ public class UserServiceImpl implements UserService {
 		}
 		return false;
 	}
+
+	@Override
+	public List<User> getSearchUserList(HashMap<String, String> params) {
+		List<User> total = userDao.selectSearchUserList(params);
+		return total;
+	}
 }
