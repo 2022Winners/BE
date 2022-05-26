@@ -32,6 +32,8 @@ public class UserServiceImpl implements UserService {
 	@Transactional
 	@Override
 	public void join(User user, MultipartFile file) throws Exception {
+		if(user.getLoginId().equals("admin"))
+			user.setRole(true);
 		user.setLoginPw((new SHA256().getHash(user.getLoginPw()))); // 비밀번호 변환
 		userDao.insertUser(user);// 이미지 없이 유저 삽입
 		if (file != null) { // 이미지 있다면

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -24,8 +23,6 @@ import com.ssafy.ssafit.model.dto.User;
 import com.ssafy.ssafit.model.service.UserService;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.media.Schema;
 
 @RestController
 @RequestMapping("/api")
@@ -33,12 +30,18 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	@ApiOperation(value = "회원가입", notes = "이미지 파일, userData(loginId, loginPw, nickname, email, gender, age, role) 파일을 입력하여 회원 생성", produces = "multipart/form-data")
-	@PostMapping(value = "/user/join", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-	public ResponseEntity<?> join(
-			@RequestPart(value = "userData") @Parameter(schema = @Schema(type = "string", format = "binary")) User user,
-			@RequestPart(required = false, value = "file") MultipartFile file) throws Exception {
-
+	@ApiOperation(value = "회원가입", notes = "이미지 파일, loginId, loginPw, nickname, email, gender, age 값을 입력하여 회원 생성")
+	@PostMapping(value = "/user/join")
+	public ResponseEntity<?> join(@RequestParam(required = false) MultipartFile file, @RequestParam String loginId,
+			@RequestParam String loginPw, @RequestParam String nickname, @RequestParam String email,
+			@RequestParam int gender, @RequestParam int age) throws Exception {
+		User user = new User();
+		user.setAge(age);
+		user.setEmail(email);
+		user.setGender(gender);
+		user.setLoginId(loginId);
+		user.setLoginPw(loginPw);
+		user.setNickname(nickname);
 		userService.join(user, file);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
@@ -68,7 +71,7 @@ public class UserController {
 			return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-	@ApiOperation(value = "회원 정보 수정", notes = "id, imageId, loginPw, nickname, email, gender, age, role)값을 입력하여 회원 정보 수정")
+	@ApiOperation(value = "회원 정보 수정", notes = "id, imageId, loginPw, nickname, email, gender, age 값을 입력하여 회원 정보 수정")
 	@PutMapping("/user")
 	public ResponseEntity<?> updateUser(User user) throws Exception {
 		userService.update(user);
