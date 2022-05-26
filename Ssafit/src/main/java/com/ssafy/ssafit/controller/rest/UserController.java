@@ -96,6 +96,16 @@ public class UserController {
 	public ResponseEntity<List<User>> getUserList() {
 		return new ResponseEntity<List<User>>(userService.getUserList(), HttpStatus.OK);
 	}
+	
+	@ApiOperation(value = "회원 검색 조회", notes = "mode와 keyword를 입력하여 닉네임, 아이디로 회원 조회")
+	@GetMapping("/users/search")
+	public ResponseEntity<List<User>> getSearchUserList(@RequestParam(defaultValue = "") String mode,
+			@RequestParam(defaultValue = "") String keyword) {
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("mode", mode);
+		params.put("keyword", keyword);
+		return new ResponseEntity<List<User>>(userService.getSearchUserList(params), HttpStatus.OK);
+	}
 
 	@ApiOperation(value = "팔로잉 목록 조회", notes = "id 값을 입력하여 내가 팔로우 하는 사람 목록 조회")
 	@GetMapping("/users/following/{id}")

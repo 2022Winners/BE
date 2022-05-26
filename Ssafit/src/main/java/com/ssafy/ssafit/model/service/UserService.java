@@ -1,5 +1,6 @@
 package com.ssafy.ssafit.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -25,6 +26,9 @@ public interface UserService {
 
 	// 회원 전체 조회
 	List<User> getUserList();
+	
+	// 회원 검색 조회
+	List<User> getSearchUserList(HashMap<String, String> params);
 
 	// 내가 팔로우하는 회원 목록 조회
 	List<User> getFollowingList(int id);
