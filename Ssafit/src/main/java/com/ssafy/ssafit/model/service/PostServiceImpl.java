@@ -10,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.ssafy.ssafit.model.dao.LikeDao;
 import com.ssafy.ssafit.model.dao.PostDao;
+import com.ssafy.ssafit.model.dao.UserDao;
 import com.ssafy.ssafit.model.dto.Post;
 import com.ssafy.ssafit.model.dto.PostResponse;
+import com.ssafy.ssafit.model.dto.User;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -21,6 +23,9 @@ public class PostServiceImpl implements PostService {
 
 	@Autowired
 	private LikeDao likeDao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	@Override
 	public void create(Post post) {
@@ -127,7 +132,13 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public List<PostResponse> getGenderTopList(int userId) {
 		List<PostResponse> responseList = new ArrayList<>();
-		List<Post> genderTop = postDao.selectTopListByGender(userId);
+		User user = userDao.selectById(userId);
+		List<Post> genderTop = new ArrayList<Post>();
+		if(user.getGender() == 0) {
+			genderTop = postDao.selectTop4List();
+		}else {
+			genderTop = postDao.selectTopListByGender(userId);
+		}
 		for (int i = 0; i < genderTop.size(); i++) {
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
 			map.put("userId", userId);
@@ -141,7 +152,13 @@ public class PostServiceImpl implements PostService {
 	@Override
 	public List<PostResponse> getAgeTopList(int userId) {
 		List<PostResponse> responseList = new ArrayList<>();
-		List<Post> ageTop = postDao.selectTopListByAge(userId);
+		User user = userDao.selectById(userId);
+		List<Post> ageTop = new ArrayList<Post>();
+		if(user.getAge() == 0) {
+			ageTop = postDao.selectTop4List();
+		}else {
+			ageTop = postDao.selectTopListByAge(userId);
+		}
 		for (int i = 0; i < ageTop.size(); i++) {
 			HashMap<String, Integer> map = new HashMap<String, Integer>();
 			map.put("userId", userId);

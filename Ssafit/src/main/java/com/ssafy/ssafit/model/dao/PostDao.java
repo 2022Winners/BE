@@ -26,6 +26,9 @@ public interface PostDao {
 
 	// 탑 8개 영상 조회
 	List<Post> selectTopList();
+	
+	// 탑 4개 영상 조회
+	List<Post> selectTop4List();
 
 	// 성별 좋아요 누른 영상 탑 순위
 	List<Post> selectTopListByGender(int userId);
