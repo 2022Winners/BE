@@ -17,4 +17,16 @@ public class Comment {
 	private String content;
 	private boolean isDeleted;
 	private String createdAt;
+	
+	public Comment(int id, String content) {
+		this.id = id;
+		this.content = content;
+	}
+	
+	public Comment(int userId, String writer, int postId, String content) {
+		this.userId = userId;
+		this.writer = writer;
+		this.postId = postId;
+		this.content = content;
+	}
 }

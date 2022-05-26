@@ -17,4 +17,17 @@ public class Reply {
 	private int commentId;
 	private String content;
 	private String createdAt;
+	
+	public Reply(int id, String content) {
+		this.id = id;
+		this.content = content;
+	}
+	
+	public Reply(int userId, String writer, int postId, int commentId, String content) {
+		this.userId = userId;
+		this.writer = writer;
+		this.postId = postId;
+		this.commentId = commentId;
+		this.content = content;
+	}
 }
