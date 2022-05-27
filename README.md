@@ -11,11 +11,12 @@ BackEnd-JAVA, SpringBoot
 하단의 결과물은 백엔드 REST API 방식으로 구현된 결과물이다.      
 
 ## 2. 프로젝트 결과물 소개
+![image](https://user-images.githubusercontent.com/99406873/170677770-85fcbdaf-0cc2-4a67-87b1-8a72fbbebad1.png)
+
 
 ### 1. 영상 게시물 컨트롤러
 
 ![image](https://user-images.githubusercontent.com/99406873/170677420-000c1504-2f91-4668-9d6c-8372a1e71a0b.png)
-
 
 ![1. 메인화면]
 ![2. 조회수 많은 인기영상]
@@ -40,6 +41,7 @@ BackEnd-JAVA, SpringBoot
 
 
 ### 2. 유저 컨트롤러
+![image](https://user-images.githubusercontent.com/99406873/170677482-d0e29f2d-5fa3-4f53-8c50-33e3ea24af0b.png)
 
 
 ![5. 로그인 화면]
@@ -54,6 +56,7 @@ BackEnd-JAVA, SpringBoot
 - 로그인을 하면 조회수 옆에 찜하기 버튼이 생성되고, 해당 버튼을 누르면 마이페이지에서 조회 가능
 
 ### 3. 댓글 컨트롤러
+![image](https://user-images.githubusercontent.com/99406873/170677523-0b52cf99-e177-4aba-ba9c-42491662a47d.png)
 
 
 ![수정완료]
@@ -66,6 +69,7 @@ BackEnd-JAVA, SpringBoot
 - 리뷰 목록에는 리뷰 번호, 리뷰 제목, 작성자, 작성 시간이 출력되고, 리뷰 제목을 클릭하면 해당 리뷰의 상세 정보 화면으로 이동
 
 ### 4. 대댓글 컨트롤러
+![image](https://user-images.githubusercontent.com/99406873/170677545-3c8146d1-adc7-4216-a253-8a961642dfb0.png)
 
 
 
@@ -82,6 +86,7 @@ BackEnd-JAVA, SpringBoot
 - 리뷰 수정 시 제목과 내용만 수정 가능하고 작성자와 시간은 자동으로 입력됨
 
 ### 5. 좋아요 컨트롤러
+![image](https://user-images.githubusercontent.com/99406873/170677593-e657d8f8-91f4-4dc4-a42c-c122fd32597d.png)
 
 
 ![리뷰작성화면]
@@ -90,6 +95,7 @@ BackEnd-JAVA, SpringBoot
 - 작성자는 리뷰 제목, 작성자 이름, 리뷰 내용을 기재 후 등록을 누르면 해당 리뷰가 저장되고, 취소를 누르면 이전 페이지로 이동
 
 ### 6. 팔로우 컨트롤러
+![image](https://user-images.githubusercontent.com/99406873/170677699-d3e54fb1-2659-4e58-bca2-66b47ef47cca.png)
 
 
 ![6. 회원가입 화면]
