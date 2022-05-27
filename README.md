@@ -14,6 +14,7 @@ BackEnd-JAVA, SpringBoot
 
 ### 1. 영상 게시물 컨트롤러
 
+![image](https://user-images.githubusercontent.com/99406873/170677420-000c1504-2f91-4668-9d6c-8372a1e71a0b.png)
 
 
 ![1. 메인화면]
