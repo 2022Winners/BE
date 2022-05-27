@@ -86,7 +86,8 @@ BackEnd-JAVA, SpringBoot
 - 리뷰 수정 시 제목과 내용만 수정 가능하고 작성자와 시간은 자동으로 입력됨
 
 ### 5. 좋아요 컨트롤러
-![image](https://user-images.githubusercontent.com/99406873/170677593-e657d8f8-91f4-4dc4-a42c-c122fd32597d.png)
+![image](https://user-images.githubusercontent.com/99406873/170679150-79f25d7b-d838-4a02-be2e-efea09311e62.png)
+
 
 
 ![리뷰작성화면]
